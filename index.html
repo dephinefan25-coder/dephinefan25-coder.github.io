@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Delphine Fan Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Inter:wght@300;400;500;600&display=swap">
+<style>
+/* Layout: one-screen home = full-bleed Seattle photo with a soft ivory panel on the right (name, summary, key figures, actions) + a single row of six category tiles; each tile opens its own view. Deliberately light. */
+:root {
+  --bg: #f7f5f0;
+  --surface: #ffffff;
+  --ink: #17233a;
+  --muted: #5f6673;
+  --line: rgba(23, 35, 58, 0.12);
+  --navy: #1f3557;
+  --gold: #a88452;
+  --serif: "Cormorant Garamond", "Cormorant", Garamond, "Times New Roman", serif;
+  --sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { overflow-x: hidden; }
+body { overflow-x: clip; margin: 0; background: var(--bg); color: var(--ink); font-family: var(--sans); font-weight: 400; font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+a { color: var(--navy); text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: 4px; }
+a:focus-visible { outline: 1px solid var(--gold); outline-offset: 4px; }
+h1, h2, h3 { margin: 0; text-wrap: balance; }
+p { margin: 0; max-width: 40em; }
+strong, b { font-weight: 600; }
+.muted { color: var(--muted); }
+
+.wrap { max-width: 1200px; margin: 0 auto; padding-inline: 32px; padding-block: 0; display: flex; flex-direction: column; }
+.eyebrow, .label { font-family: var(--sans); font-size: 11px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; color: var(--gold); }
+
+/* Home: fits one screen on a laptop */
+.home { height: 100vh; height: 100svh; min-height: 620px; display: flex; flex-direction: column; }
+.hero {
+  flex: 1 1 auto; min-height: 0;
+  width: 100vw; margin-inline: calc(50% - 50vw);
+  display: flex; justify-content: flex-end; align-items: center;
+  padding: 32px max(32px, calc((100vw - 1200px) / 2 + 32px));
+  background-color: #cdd9e4;
+  background-image:
+    linear-gradient(270deg, rgba(247,245,240,.94) 0%, rgba(247,245,240,.86) 34%, rgba(247,245,240,0) 62%),
+    linear-gradient(180deg, rgba(247,245,240,0) 70%, rgba(247,245,240,1) 100%),
+    url("hero.jpg");
+  background-size: cover; background-position: 30% 55%;
+}
+.hero-text { width: min(500px, 100%); display: flex; flex-direction: column; align-items: flex-start; gap: 14px; }
+.home h1 { font-family: var(--serif); font-weight: 500; font-size: clamp(52px, 6.4vw, 84px); line-height: .95; color: var(--ink); }
+.rule { display: block; width: 56px; height: 1px; background: var(--gold); }
+.summary { font-size: 17px; color: var(--muted); }
+.targets { display: flex; flex-wrap: wrap; gap: 4px 18px; font-size: 11px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--navy); }
+
+.kpis { width: 100%; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-top: 4px; }
+.kpi { padding: 12px 12px 12px 0; display: flex; flex-direction: column; gap: 2px; }
+.kpi + .kpi { padding-left: 14px; border-left: 1px solid var(--line); }
+.kpi b { font-family: var(--serif); font-weight: 600; font-size: 30px; line-height: 1.05; color: var(--navy); font-variant-numeric: lining-nums tabular-nums; }
+.kpi span { font-size: 12px; color: var(--muted); line-height: 1.35; }
+.btns { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 6px; }
+.btn { display: inline-block; padding: 11px 22px; border-radius: 2px; background: var(--navy); color: #ffffff; font-size: 12px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; transition: background .25s, color .25s, box-shadow .25s; }
+.btn:hover { text-decoration: none; background: var(--ink); }
+.btn.ghost { background: transparent; color: var(--navy); box-shadow: inset 0 0 0 1px var(--navy); }
+.btn.ghost:hover { background: var(--navy); color: #ffffff; }
+
+.tiles { flex: none; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); margin-block: 8px 28px; }
+.tile { position: relative; display: flex; flex-direction: column; gap: 4px; padding: 20px 18px 18px; background: var(--surface); color: var(--ink); transition: background .3s; }
+.tile:hover { text-decoration: none; background: #fbf8f2; }
+.icon { color: var(--gold); margin-bottom: 8px; }
+.icon svg { width: 24px; height: 24px; display: block; }
+.tile-t { font-family: var(--serif); font-size: 24px; font-weight: 600; line-height: 1.1; color: var(--ink); }
+.tile-d { font-size: 12.5px; color: var(--muted); line-height: 1.45; }
+.arrow { margin-top: auto; padding-top: 10px; font-size: 11px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); transition: letter-spacing .3s; }
+.arrow::before { content: "View "; }
+.tile:hover .arrow { letter-spacing: .3em; }
+
+/* Views */
+main { min-width: 0; }
+.view { display: flex; flex-direction: column; gap: 32px; padding-top: 64px; padding-bottom: 8px; animation: rise .6s cubic-bezier(.2,.8,.2,1); }
+@keyframes rise { from { opacity: .3; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.back { align-self: flex-start; font-size: 11px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); }
+section > h2 { font-family: var(--serif); font-weight: 500; font-size: clamp(48px, 7vw, 72px); line-height: 1; color: var(--ink); display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap; padding-bottom: 22px; border-bottom: 1px solid var(--line); }
+section > h2 .label { font-size: 11px; }
+h2:focus { outline: none; }
+
+.timeline { display: flex; flex-direction: column; }
+.entry { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 32px; padding-block: 30px; border-bottom: 1px solid var(--line); }
+.when { font-size: 11px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); padding-top: 9px; font-variant-numeric: tabular-nums; }
+.entry h3 { font-family: var(--serif); font-weight: 600; font-size: 28px; line-height: 1.15; }
+.entry .org { color: var(--muted); margin: 4px 0 14px; font-size: 15px; }
+.entry ul { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 8px; max-width: 42em; }
+.entry li::marker { color: var(--gold); }
+.num { font-weight: 600; color: var(--navy); }
+
+.projects { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.card { background: var(--surface); padding: 32px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.card h3 { font-family: var(--serif); font-weight: 600; font-size: 28px; line-height: 1.15; }
+.card dl { margin: 0; display: grid; grid-template-columns: 84px minmax(0, 1fr); gap: 8px 14px; font-size: 15px; }
+.card dt { font-size: 11px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); padding-top: 4px; }
+.card dd { margin: 0; }
+.card .result { border-top: 1px solid var(--line); padding-top: 14px; font-size: 15px; }
+.card .links { display: flex; gap: 16px; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; margin-top: auto; flex-wrap: wrap; }
+
+.skills { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.skills > div { display: flex; flex-direction: column; gap: 14px; padding: 32px; background: var(--surface); }
+.skills .row { display: flex; flex-wrap: wrap; gap: 8px; }
+.skills .pill { font-size: 14px; padding: 6px 14px; border: 1px solid var(--line); border-radius: 2px; background: var(--bg); }
+
+.contact { display: flex; flex-direction: column; gap: 12px; font-size: 19px; }
+.contact span { color: var(--gold); font-size: 11px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; display: inline-block; min-width: 96px; }
+
+footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); border-top: 1px solid var(--line); padding-top: 22px; }
+
+@media (prefers-reduced-motion: reduce) { .tile, .btn, .arrow { transition: none; } .view { animation: none; } }
+@media (max-height: 700px) and (min-width: 901px) {
+  .tile-d { display: none; }
+  .home h1 { font-size: 60px; }
+  .hero-text { gap: 10px; }
+}
+@media (max-width: 1000px) {
+  .tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 900px) {
+  .home { height: auto; min-height: 0; }
+  .hero { min-height: 0; padding-top: 54vw; padding-bottom: 24px; align-items: flex-end; background-position: 30% top; background-size: 100% auto; background-repeat: no-repeat; background-color: var(--bg);
+    background-image: linear-gradient(180deg, rgba(247,245,240,0) 30vw, rgba(247,245,240,1) 56vw), url("hero.jpg"); }
+  .hero-text { width: 100%; }
+}
+@media (max-width: 560px) {
+  .wrap { padding-inline: 20px; }
+  .hero { padding-inline: 20px; }
+  .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .kpi b { font-size: 21px; white-space: nowrap; }
+  .entry { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+  .card, .skills > div { padding: 24px; }
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header id="home" class="home">
+    <div class="hero">
+    <!-- ===== 编辑：首页 名字 / 简介 / 求职方向 / 三个数字 / 按钮 ===== -->
+    <div class="hero-text">
+    <div class="eyebrow">Portfolio · Seattle</div>
+    <h1>Delphine Fan</h1>
+    <span class="rule" aria-hidden="true"></span>
+    <p class="summary">Strategy &amp; operations analyst with 3 years at Lenovo. MS Business Analytics candidate at UW Foster, graduating June 2027.</p>
+    <div class="targets" aria-label="Target roles">
+      <span class="chip">Data Analyst</span>
+      <span class="chip">Business Analyst</span>
+      <span class="chip">Financial Analyst</span>
+      <span class="chip">Strategy &amp; Ops</span>
+    </div>
+      <div class="kpis">
+        <div class="kpi"><b>$250M+</b><span>portfolio kept on budget</span></div>
+        <div class="kpi"><b>10 hrs/wk</b><span>reporting automated</span></div>
+        <div class="kpi"><b>CFA</b><span>Level I &amp; II passed</span></div>
+      </div>
+      <div class="btns">
+      <a class="btn" href="resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a>
+      <a class="btn ghost" href="https://www.linkedin.com/in/fanhaoran/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+    </div>
+    <!-- ===== 编辑：首页六个板块卡片（标题和一句话介绍） ===== -->
+    <nav class="tiles" aria-label="Sections">
+        <a class="tile t-experience" href="#experience"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2.5"/><path d="M8.5 7V5.5A1.5 1.5 0 0 1 10 4h4a1.5 1.5 0 0 1 1.5 1.5V7M3 12.5h18"/></svg></span><span class="tile-t">Experience</span><span class="tile-d">Lenovo, Source Code Capital, Kingsoft WPS</span><span class="arrow" aria-hidden="true">›</span></a>
+        <a class="tile t-projects" href="#projects"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span><span class="tile-t">Projects</span><span class="tile-d">Analytics projects from UW Foster</span><span class="arrow" aria-hidden="true">›</span></a>
+        <a class="tile t-skills" href="#skills"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.4 5.2L20 9l-4.2 3.8L17 18.5 12 15.6 7 18.5l1.2-5.7L4 9l5.6-.8z"/></svg></span><span class="tile-t">Skills</span><span class="tile-d">SQL, Python, Power BI, Excel, CFA</span><span class="arrow" aria-hidden="true">›</span></a>
+        <a class="tile t-education" href="#education"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5M22 9v6"/></svg></span><span class="tile-t">Education</span><span class="tile-d">UW Foster, ESCP Paris, Xiamen University</span><span class="arrow" aria-hidden="true">›</span></a>
+        <a class="tile t-interests" href="#interests"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-7.5-10A4.3 4.3 0 0 1 12 7.4 4.3 4.3 0 0 1 19.5 10c0 5.4-7.5 10-7.5 10z"/></svg></span><span class="tile-t">Interests</span><span class="tile-d">[What I do outside work]</span><span class="arrow" aria-hidden="true">›</span></a>
+        <a class="tile t-contact" href="#contact"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.5 6.5l8.5 6.5 8.5-6.5"/></svg></span><span class="tile-t">Contact</span><span class="tile-d">Email, LinkedIn and resume</span><span class="arrow" aria-hidden="true">›</span></a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ===== 编辑：Experience 工作经历 ===== -->
+    <section id="experience" class="view" hidden>
+      <a class="back" href="#">← Back to home</a>
+
+      <h2>Experience</h2>
+      <div class="timeline">
+        <article class="entry">
+          <div class="when">Aug 2023 – Jun 2026</div>
+          <div>
+            <h3>Strategy &amp; Operations Specialist</h3>
+            <div class="org">Lenovo Group, Digital Transformation Office · Beijing</div>
+            <ul>
+              <li>Kept a <span class="num">$250M+</span>, 200+ project portfolio within annual spending targets for 3 consecutive fiscal years through monthly cash monitoring and forecasting.</li>
+              <li>Drove a <span class="num">4% YoY</span> improvement in workforce utilization by analyzing productivity for 600+ employees and leading quarterly resource planning.</li>
+              <li>Replaced <span class="num">6</span> manual PowerPoint decks per cycle with a real-time Power BI dashboard of project spending and execution rates.</li>
+              <li>Completed the Anaplan to Microsoft Project Operations migration in <span class="num">4 months</span>, covering status review, data field mapping and functional testing.</li>
+              <li>Owned Power BI operational dashboards (8 metrics) and Anaplan operations, using SQL to investigate and fix data-logic issues.</li>
+              <li>Promoted from Associate to Specialist within the first year.</li>
+            </ul>
+          </div>
+        </article>
+        <article class="entry">
+          <div class="when">Jun 2021 – Nov 2021</div>
+          <div>
+            <h3>Post-Investment Service Intern</h3>
+            <div class="org">Source Code Capital · Beijing</div>
+            <ul>
+              <li>Analyzed <span class="num">15+</span> startups in technology, consumer and healthcare through desk research, performance analysis and founder interviews.</li>
+              <li>Launched 3 CEO learning events and a corporate visit program connecting 9 portfolio companies with local enterprises and government.</li>
+            </ul>
+          </div>
+        </article>
+        <article class="entry">
+          <div class="when">Mar 2021 – Jun 2021</div>
+          <div>
+            <h3>Commercialization Operations Intern</h3>
+            <div class="org">Kingsoft WPS Office · Beijing</div>
+            <ul>
+              <li>Monitored daily ad and monetization metrics for global mobile apps and optimized traffic allocation, contributing to a <span class="num">6% QoQ</span> increase in ad revenue.</li>
+              <li>Coordinated campaigns with e-commerce partners such as Lazada and demand-side platforms, including click-through performance analysis.</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== 编辑：Projects 项目（替换 [方括号] 占位内容；复制一个 <article>…</article> 可增加项目） ===== -->
+    <section id="projects" class="view" hidden>
+      <a class="back" href="#">← Back to home</a>
+
+      <h2>Projects <span class="label">UW Foster MSBA</span></h2>
+      <div class="projects">
+        <article class="card">
+          <div class="label">[Tools, e.g. Python · SQL · Tableau]</div>
+          <h3>[Project title]</h3>
+          <dl>
+            <dt>Question</dt><dd>[What business question did it answer?]</dd>
+            <dt>Data</dt><dd>[Dataset and size]</dd>
+            <dt>Approach</dt><dd>[Methods and tools used]</dd>
+          </dl>
+          <div class="result"><span class="label">Result</span><br>[Key finding or recommendation, with a number if possible]</div>
+          <div class="links"><a href="#" target="_blank" rel="noopener">[Link] ↗</a></div>
+        </article>
+        <article class="card">
+          <div class="label">[Tools, e.g. Python · SQL · Tableau]</div>
+          <h3>[Project title]</h3>
+          <dl>
+            <dt>Question</dt><dd>[What business question did it answer?]</dd>
+            <dt>Data</dt><dd>[Dataset and size]</dd>
+            <dt>Approach</dt><dd>[Methods and tools used]</dd>
+          </dl>
+          <div class="result"><span class="label">Result</span><br>[Key finding or recommendation, with a number if possible]</div>
+          <div class="links"><a href="#" target="_blank" rel="noopener">[Link] ↗</a></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== 编辑：Skills 技能 ===== -->
+    <section id="skills" class="view" hidden>
+      <a class="back" href="#">← Back to home</a>
+
+      <h2>Skills</h2>
+      <div class="skills">
+        <div><span class="label">Data &amp; analysis</span><div class="row"><span class="pill">SQL</span><span class="pill">Python</span><span class="pill">R</span><span class="pill">Excel</span><span class="pill">STATA</span><span class="pill">SPSS</span></div></div>
+        <div><span class="label">Reporting &amp; systems</span><div class="row"><span class="pill">Power BI</span><span class="pill">Anaplan</span><span class="pill">Microsoft Project Operations</span></div></div>
+        <div><span class="label">Finance</span><div class="row"><span class="pill">CFA Level I &amp; II passed</span><span class="pill">Budget forecasting</span><span class="pill">Portfolio analysis</span></div></div>
+        <div><span class="label">Operations</span><div class="row"><span class="pill">Resource planning</span><span class="pill">Requirements &amp; testing</span><span class="pill">Executive reporting</span></div></div>
+      </div>
+    </section>
+
+    <!-- ===== 编辑：Education 教育 ===== -->
+    <section id="education" class="view" hidden>
+      <a class="back" href="#">← Back to home</a>
+
+      <h2>Education</h2>
+      <div class="timeline">
+        <article class="entry">
+          <div class="when">2026 – Jun 2027</div>
+          <div>
+            <h3>MS, Business Analytics</h3>
+            <div class="org">University of Washington, Foster School of Business · Seattle</div>
+            <p class="muted">Competitive Strategy; Probability and Statistics; Data Management and Visualization</p>
+          </div>
+        </article>
+        <article class="entry">
+          <div class="when">2020 – 2023</div>
+          <div>
+            <h3>Master in Management, Finance specialization</h3>
+            <div class="org">ESCP Business School · Paris</div>
+            <p class="muted">GPA 3.6 / 4.0</p>
+          </div>
+        </article>
+        <article class="entry">
+          <div class="when">2016 – 2020</div>
+          <div>
+            <h3>BA, French Language &amp; Literature; Minor in Economics</h3>
+            <div class="org">Xiamen University · Xiamen</div>
+            <p class="muted">GPA 3.5 / 4.0</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== 编辑：Interests 兴趣爱好 ===== -->
+    <section id="interests" class="view" hidden>
+      <a class="back" href="#">← Back to home</a>
+      <h2>Interests</h2>
+      <div class="projects">
+        <article class="card">
+          <div class="label">[Category, e.g. Travel · Sports · Reading]</div>
+          <h3>[Interest]</h3>
+          <p>[A few sentences about it, and a photo if you like.]</p>
+        </article>
+        <article class="card">
+          <div class="label">[Category, e.g. Travel · Sports · Reading]</div>
+          <h3>[Interest]</h3>
+          <p>[A few sentences about it, and a photo if you like.]</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===== 编辑：Contact 联系方式 ===== -->
+    <section id="contact" class="view" hidden>
+      <a class="back" href="#">← Back to home</a>
+      <h2>Contact</h2>
+      <p>I'm looking for data analyst, business analyst, financial analyst, and strategy &amp; operations roles.</p>
+      <div class="contact">
+        <div><span>Email</span> · dephine.fan25@gmail.com</div>
+        <div><span>LinkedIn</span> · <a href="https://www.linkedin.com/in/fanhaoran/" target="_blank" rel="noopener">linkedin.com/in/fanhaoran</a></div>
+        <div><span>GitHub</span> · <a href="https://github.com/dephinefan25-coder" target="_blank" rel="noopener">dephinefan25-coder</a></div>
+        <div><span>Based in</span> · Seattle, WA</div>
+      </div>
+      <div class="btns"><a class="btn" href="resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a></div>
+    </section>
+  </main>
+
+  <footer>© 2026 Delphine Fan · Seattle, WA</footer>
+</div>
+<script>
+(function () {
+  var home = document.getElementById('home');
+  var footer = document.querySelector('footer');
+  var views = Array.prototype.slice.call(document.querySelectorAll('.view'));
+  function show() {
+    var id = (location.hash || '').slice(1);
+    var target = null;
+    views.forEach(function (v) { var on = v.id === id; v.hidden = !on; if (on) target = v; });
+    home.hidden = !!target;
+    if (footer) footer.hidden = !target;
+    window.scrollTo(0, 0);
+    if (target) { var h = target.querySelector('h2'); if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); } }
+  }
+  window.addEventListener('hashchange', show);
+  show();
+})();
+</script>
+</body>
+</html>
