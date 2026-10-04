@@ -138,6 +138,14 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
   .entry { grid-template-columns: minmax(0, 1fr); gap: 6px; }
   .card, .skills > div { padding: 24px; }
 }
+.story { display: flex; flex-direction: column; gap: 22px; max-width: 42em; }
+.story p { font-size: 18px; line-height: 1.8; color: var(--ink); max-width: none; }
+.story p:first-child::first-letter { font-family: var(--serif); font-size: 3.4em; float: left; line-height: .85; padding: 6px 10px 0 0; color: var(--navy); }
+.story-photos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-block: 4px 10px; }
+.story-photos figure { margin: 0; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.story-photos img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; border-radius: 2px; }
+.story-photos figcaption { font-size: 12px; line-height: 1.4; color: var(--muted); }
+@media (max-width: 560px) { .story-photos { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
@@ -180,49 +188,31 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
   </header>
 
   <main>
-    <!-- ===== 编辑：Experience 工作经历 ===== -->
+    <!-- ===== 编辑：My Story 我的故事 ===== -->
     <section id="experience" class="view" hidden>
       <a class="back" href="#">← Back to home</a>
 
       <h2>My Story</h2>
-      <div class="timeline">
-        <article class="entry">
-          <div class="when">Aug 2023 – Jun 2026</div>
-          <div>
-            <h3>Strategy &amp; Operations Specialist</h3>
-            <div class="org">Lenovo Group, Digital Transformation Office · Beijing</div>
-            <ul>
-              <li>Kept a <span class="num">$250M+</span>, 200+ project portfolio within annual spending targets for 3 consecutive fiscal years through monthly cash monitoring and forecasting.</li>
-              <li>Drove a <span class="num">4% YoY</span> improvement in workforce utilization by analyzing productivity for 600+ employees and leading quarterly resource planning.</li>
-              <li>Replaced <span class="num">6</span> manual PowerPoint decks per cycle with a real-time Power BI dashboard of project spending and execution rates.</li>
-              <li>Completed the Anaplan to Microsoft Project Operations migration in <span class="num">4 months</span>, covering status review, data field mapping and functional testing.</li>
-              <li>Owned Power BI operational dashboards (8 metrics) and Anaplan operations, using SQL to investigate and fix data-logic issues.</li>
-              <li>Promoted from Associate to Specialist within the first year.</li>
-            </ul>
-          </div>
-        </article>
-        <article class="entry">
-          <div class="when">Jun 2021 – Nov 2021</div>
-          <div>
-            <h3>Post-Investment Service Intern</h3>
-            <div class="org">Source Code Capital · Beijing</div>
-            <ul>
-              <li>Analyzed <span class="num">15+</span> startups in technology, consumer and healthcare through desk research, performance analysis and founder interviews.</li>
-              <li>Launched 3 CEO learning events and a corporate visit program connecting 9 portfolio companies with local enterprises and government.</li>
-            </ul>
-          </div>
-        </article>
-        <article class="entry">
-          <div class="when">Mar 2021 – Jun 2021</div>
-          <div>
-            <h3>Commercialization Operations Intern</h3>
-            <div class="org">Kingsoft WPS Office · Beijing</div>
-            <ul>
-              <li>Monitored daily ad and monetization metrics for global mobile apps and optimized traffic allocation, contributing to a <span class="num">6% QoQ</span> increase in ad revenue.</li>
-              <li>Coordinated campaigns with e-commerce partners such as Lazada and demand-side platforms, including click-through performance analysis.</li>
-            </ul>
-          </div>
-        </article>
+      <div class="story">
+        <p>At eighteen, I left Tianjin for Xiamen, a small island city on China's southeast coast, about 1,700 km from home. I had hoped to study economics, but the university placed me in French, a major I had never chosen. I could have treated it as a setback. Instead, I committed to it, starting from zero beside classmates who had studied French for years, and added a second degree in economics on evenings and weekends. Somewhere along the way, the language stopped being an obstacle and became my window to the wider world. Outside class, I found my footing in volunteering and student clubs. My favorite memory is serving as assistant director of <em>The Marriage of Figaro</em>, a French play that twenty classmates and I staged entirely on our own.</p>
+        <div class="story-photos">
+          <figure><img src="photos/xmu-cast.jpg" alt="Backstage with the cast and crew of The Marriage of Figaro" loading="lazy"><figcaption>Backstage with the cast and crew of <em>The Marriage of Figaro</em></figcaption></figure>
+          <figure><img src="photos/xmu-curtain-call.jpg" alt="Curtain call of the French play on stage" loading="lazy"><figcaption>Curtain call</figcaption></figure>
+          <figure><img src="photos/xmu-volunteer.jpg" alt="Volunteering at an international workshop in Xiamen" loading="lazy"><figcaption>Volunteering at an international workshop</figcaption></figure>
+        </div>
+        <p>That window is what led me to Paris. In 2020 I enrolled at ESCP Business School just as Covid moved every class online, so I spent my first year studying from home and turned the time into internships at Kingsoft WPS and Source Code Capital in Beijing. At Source Code, I met founders with brilliant ideas who were struggling to build teams and processes, and it changed how I saw business: companies often rise or fall on how they are run, not only on what they build. When I finally lived in Paris, I spent every break traveling. Seeing how vast and varied the world is, I quietly made up my mind to build my career at a global company.</p>
+        <div class="story-photos">
+          <figure><img src="photos/paris-vivatech.jpg" alt="A panel on stage at VivaTech in Paris" loading="lazy"><figcaption>VivaTech, Europe's largest tech event</figcaption></figure>
+          <figure><img src="photos/alps-ski.jpg" alt="Delphine skiing in the French Alps with her instructor" loading="lazy"><figcaption>A week of skiing in the French Alps</figcaption></figure>
+          <figure><img src="photos/escp-graduation.jpg" alt="Delphine holding her ESCP Master in Management diploma" loading="lazy"><figcaption>Graduating from ESCP Business School</figcaption></figure>
+        </div>
+        <p>That decision took me to Lenovo's global Digital Transformation Office, which oversees more than 200 projects and a $250M+ budget. Soon after I arrived, the outside developer behind our Power BI reporting left, and no one fully understood the system. I took ownership, rebuilt it piece by piece, and turned it into automated dashboards that replaced monthly slide decks for eight leaders. Within a year I was promoted, and our team was named best team three years running. When a reorganization and, later, a senior colleague's departure shifted more work onto my desk, I trained the newcomers, absorbed the rest, and kept our numbers on track. Along the way I learned that data opens the conversation, but judgment and the ability to bring people along decide the outcome.</p>
+        <div class="story-photos">
+          <figure><img src="photos/lenovo-event.jpg" alt="Lenovo clapper raised above a packed arena at the fiscal-year kickoff" loading="lazy"><figcaption>Lenovo's fiscal-year kickoff</figcaption></figure>
+          <figure><img src="photos/lenovo-hq.jpg" alt="Lenovo headquarters building in Beijing" loading="lazy"><figcaption>Lenovo headquarters, Beijing</figcaption></figure>
+          <figure><img src="photos/lenovo-welcome.jpg" alt="Slide welcoming new members to the Digital Transformation team" loading="lazy"><figcaption>Welcomed into the Digital Transformation family</figcaption></figure>
+        </div>
+        <p>That lesson brought me to Seattle, where I'm now pursuing an MS in Business Analytics at the University of Washington Foster School of Business, pairing sharper analytics with stronger business judgment. Looking back, nearly every turn in my story began with something I didn't plan for. Each time, I adapted, formed my own view, and kept going until the effort paid off. That resilience is what I hope to bring to my next team.</p>
       </div>
     </section>
 
