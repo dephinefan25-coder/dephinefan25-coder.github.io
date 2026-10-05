@@ -37,15 +37,15 @@ strong, b { font-weight: 600; }
 .eyebrow, .label { font-family: var(--sans); font-size: 11px; font-weight: 600; letter-spacing: .24em; text-transform: uppercase; color: var(--gold); }
 
 /* Home: fits one screen on a laptop */
-.home { height: 100vh; height: 100svh; min-height: 620px; display: flex; flex-direction: column; }
+.home { min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; }
 .hero {
-  flex: 1 1 auto; min-height: 0;
+  flex: 1 0 auto;
   width: 100vw; margin-inline: calc(50% - 50vw);
   display: flex; justify-content: flex-end; align-items: center;
   padding: 32px max(32px, calc((100vw - 1200px) / 2 + 32px));
   background-color: #cdd9e4;
   background-image:
-    linear-gradient(270deg, rgba(247,245,240,.94) 0%, rgba(247,245,240,.86) 34%, rgba(247,245,240,0) 62%),
+    linear-gradient(270deg, rgba(247,245,240,.94) 0%, rgba(247,245,240,.86) max(34%, 560px), rgba(247,245,240,0) max(62%, 760px)),
     linear-gradient(180deg, rgba(247,245,240,0) 70%, rgba(247,245,240,1) 100%),
     url("Seattle.jpg");
   background-size: cover; background-position: 30% 55%;
@@ -116,7 +116,7 @@ h2:focus { outline: none; }
 footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); border-top: 1px solid var(--line); padding-top: 22px; }
 
 @media (prefers-reduced-motion: reduce) { .tile, .btn, .arrow { transition: none; } .view { animation: none; } }
-@media (max-height: 700px) and (min-width: 901px) {
+@media (max-height: 700px) and (min-width: 1101px) {
   .tile-d { display: none; }
   .home h1 { font-size: 60px; }
   .hero-text { gap: 10px; }
@@ -124,8 +124,8 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
 @media (max-width: 1000px) {
   .tiles { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
-@media (max-width: 900px) {
-  .home { height: auto; min-height: 0; }
+@media (max-width: 1100px) {
+  .home { min-height: 0; }
   .hero { min-height: 0; padding-top: 54vw; padding-bottom: 24px; align-items: flex-end; background-position: 30% top; background-size: 100% auto; background-repeat: no-repeat; background-color: var(--bg);
     background-image: linear-gradient(180deg, rgba(247,245,240,0) 30vw, rgba(247,245,240,1) 56vw), url("Seattle.jpg"); }
   .hero-text { width: 100%; }
