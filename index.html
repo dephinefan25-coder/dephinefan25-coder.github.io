@@ -138,13 +138,25 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
   .entry { grid-template-columns: minmax(0, 1fr); gap: 6px; }
   .card, .skills > div { padding: 24px; }
 }
-.story { display: flex; flex-direction: column; gap: 28px; }
-.story > p { font-size: 18px; line-height: 1.8; color: var(--ink); max-width: none; margin: 0; }
+.story { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); grid-auto-flow: row dense; column-gap: 56px; row-gap: 56px; align-items: center; }
+.story > p { grid-column: 1; font-size: 18px; line-height: 1.8; color: var(--ink); max-width: none; margin: 0; }
+.story > p:nth-of-type(even) { grid-column: 2; }
+.story > p:nth-of-type(even) + .story-photos { grid-column: 1; }
+.story > p:last-child { grid-column: 1 / -1; max-width: 46em; }
 .story p:first-child::first-letter { font-family: var(--serif); font-size: 3.4em; float: left; line-height: .85; padding: 6px 10px 0 0; color: var(--navy); }
-.story-photos { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin-bottom: 28px; }
+.story-photos { grid-column: 2; display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 12px; }
 .story-photos figure { margin: 0; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.story-photos figure:first-child { grid-row: 1 / span 2; }
 .story-photos img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; border-radius: 2px; }
+.story-photos figure:first-child img { aspect-ratio: auto; flex: 1 1 0; min-height: 0; }
 .story-photos figcaption { font-size: 12px; line-height: 1.4; color: var(--muted); }
+@media (max-width: 860px) {
+  .story { grid-template-columns: minmax(0, 1fr); row-gap: 24px; }
+  .story > p, .story > p:nth-of-type(even), .story > p:nth-of-type(even) + .story-photos, .story-photos { grid-column: 1; }
+  .story-photos { margin-bottom: 16px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .story-photos figure:first-child { grid-row: auto; }
+  .story-photos figure:first-child img { aspect-ratio: 4 / 3; flex: none; }
+}
 @media (max-width: 560px) {
   .story-photos { grid-template-columns: minmax(0, 1fr); }
 }
@@ -216,7 +228,7 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
         </div>
         <p>That lesson brought me to Seattle, where I'm now pursuing an MS in Business Analytics at the University of Washington Foster School of Business. I'm learning to use the machine learning and AI, to help businesses make better decisions, and to be the person who understands both what these tools can do and what the business actually needs.</p>
         <div class="story-photos">
-          <figure><img src="photos/uw-team.jpg" alt="Delphine with her MSBA team, The Data Surfers, in front of PACCAR Hall" loading="lazy"><figcaption>With my MSBA team, The Data Surfers, at PACCAR Hall</figcaption></figure>
+          <figure><img src="photos/uw-team.jpg" alt="Delphine with her MSBA team, The Data Surfers, in front of PACCAR Hall" loading="lazy" style="object-position: 50% 70%"><figcaption>With my MSBA team, The Data Surfers, at PACCAR Hall</figcaption></figure>
           <figure><img src="photos/uw-foster.jpg" alt="Atrium of the Foster School of Business" loading="lazy"><figcaption>Foster School of Business</figcaption></figure>
           <figure><img src="photos/seattle-waterfront.jpg" alt="Seattle waterfront with the Great Wheel and Mount Rainier" loading="lazy"><figcaption>Seattle, my new home</figcaption></figure>
         </div>
