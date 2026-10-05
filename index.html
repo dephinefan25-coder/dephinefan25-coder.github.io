@@ -117,7 +117,8 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
 
 .interests { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; }
 .interest { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
-.interest img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; border-radius: 2px; margin-bottom: 8px; }
+.interest-photos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-bottom: 8px; }
+.interest-photos img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; display: block; border-radius: 2px; }
 .interest h3 { font-family: var(--serif); font-weight: 600; font-size: 28px; line-height: 1.15; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
 .interest p { font-size: 16px; line-height: 1.75; color: var(--ink); }
 @media (max-width: 760px) { .interests { grid-template-columns: minmax(0, 1fr); gap: 40px; } }
@@ -323,14 +324,26 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
       <h2>Interests</h2>
       <div class="interests">
         <article class="interest">
+          <div class="interest-photos">
+            <img src="photos/int-forest.jpg" alt="Hiking through an old-growth forest" loading="lazy">
+            <img src="photos/int-rainier.jpg" alt="At the entrance to Mount Rainier National Park" loading="lazy">
+          </div>
           <h3>Outdoors</h3>
           <p>Running, hiking, and skiing. Seattle makes it hard to stay inside.</p>
         </article>
         <article class="interest">
+          <div class="interest-photos">
+            <img src="photos/book-iger.jpg" alt="The Ride of a Lifetime by Robert Iger" loading="lazy">
+            <img src="photos/book-obama.jpg" alt="Becoming by Michelle Obama" loading="lazy">
+          </div>
           <h3>Reading</h3>
           <p>Mostly biographies. I like seeing how people found their way, especially when the path wasn't planned.</p>
         </article>
         <article class="interest">
+          <div class="interest-photos">
+            <img src="photos/int-maunakea.jpg" alt="Sunset at the summit of Mauna Kea, Hawaii" loading="lazy">
+            <img src="photos/int-brussels.jpg" alt="Grand-Place, Brussels" loading="lazy">
+          </div>
           <h3>Traveling</h3>
           <p>15+ countries across four continents, and counting.</p>
         </article>
