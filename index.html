@@ -122,6 +122,8 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
 .interest h3 { font-family: var(--serif); font-weight: 600; font-size: 28px; line-height: 1.15; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
 .interest p { font-size: 16px; line-height: 1.75; color: var(--ink); }
 @media (max-width: 760px) { .interests { grid-template-columns: minmax(0, 1fr); gap: 40px; } }
+.building { display: flex; flex-direction: column; gap: 12px; padding: 48px 0; }
+.building p { font-size: 18px; line-height: 1.8; color: var(--muted); }
 @media (prefers-reduced-motion: reduce) { .tile, .btn, .arrow { transition: none; } .view { animation: none; } }
 @media (max-height: 700px) and (min-width: 1101px) {
   .tile-d { display: none; }
@@ -246,6 +248,11 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
       <a class="back" href="#">← Back to home</a>
 
       <h2>Projects <span class="label">UW Foster MSBA</span></h2>
+      <div class="building">
+        <span class="label">Under construction</span>
+        <p>This page is being built. My analytics projects from the UW Foster MSBA program will be added here soon.</p>
+      </div>
+      <!-- Project card template, restore when projects are ready:
       <div class="projects">
         <article class="card">
           <div class="label">[Tools, e.g. Python · SQL · Tableau]</div>
@@ -270,6 +277,7 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
           <div class="links"><a href="#" target="_blank" rel="noopener">[Link] ↗</a></div>
         </article>
       </div>
+      -->
     </section>
 
     <!-- ===== 编辑：Skills 技能 ===== -->
