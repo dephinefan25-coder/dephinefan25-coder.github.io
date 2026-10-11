@@ -202,6 +202,10 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
 .cs-node.key { background: var(--navy); border-color: var(--navy); }
 .cs-node.key b, .cs-node.key span { color: #ffffff; }
 .cs-node.retired b { color: var(--muted); text-decoration: line-through; text-decoration-color: var(--gold); }
+.cs-flow.mixed { align-items: center; }
+.cs-flow.mixed > .cs-node { align-self: center; }
+.cs-stack { flex: 1 1 150px; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+.cs-stack .cs-node { flex: none; }
 .cs-to { align-self: center; color: var(--gold); flex: none; }
 .cs-note { font-size: 13px; color: var(--muted); }
 .cs-list { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 8px; max-width: 42em; }
@@ -212,7 +216,9 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
 @media (max-width: 560px) {
   .cs-compare { grid-template-columns: minmax(0, 1fr); }
   .cs-steprow { grid-template-columns: minmax(0, 1fr); gap: 4px; }
-  .cs-flow { flex-direction: column; }
+  .cs-flow, .cs-flow.mixed { flex-direction: column; align-items: stretch; }
+  .cs-flow.mixed > .cs-node { align-self: stretch; }
+  .cs-node, .cs-stack { flex: none; }
   .cs-to { transform: rotate(90deg); }
   .cs-kpis b { font-size: 30px; }
   .cs-arch { padding: 20px; }
@@ -301,7 +307,7 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
           <div class="label">Lenovo · Anaplan · MSPO · Power BI</div>
           <h3>Moving a 200-program portfolio off Anaplan</h3>
           <p class="kicker">Helped migrate Lenovo's DT project portfolio to Microsoft Project Online in under three months, and made the process simpler along the way.</p>
-          <div class="result"><span class="label">Result</span><br>~$296K yearly license cost removed, program steps cut from 31 to 20, finance approvals routed automatically</div>
+          <div class="result"><span class="label">Result</span><br>~$296K yearly license cost removed, program steps cut from 31 to 20, and finance approvals now routed automatically through a bucket setup I designed</div>
           <div class="links"><a href="#anaplan-migration">Read the case study ›</a></div>
         </article>
         <article class="card soon">
@@ -342,10 +348,10 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
       <a class="back" href="#projects">← Back to projects</a>
 
       <h2>Anaplan to MSPO <span class="label">Case study · Lenovo · 2026</span></h2>
-      <p class="cs-lede">Lenovo's DT and IT project portfolio ran on an Anaplan model that was running out of room and costing a lot in licenses. I was the Anaplan operator and a daily business user, and I helped move the whole process to Microsoft Project Online (MSPO) while making it simpler for the people who use it.</p>
+      <p class="cs-lede">Lenovo's DT and IT project portfolio ran on an Anaplan model that was running out of room and costing a lot in licenses. I ran Anaplan day to day on the business side, kept its user playbook, trained its users and was the person they came to with questions. I helped move the whole process to Microsoft Project Online (MSPO) while making it simpler for the people who use it.</p>
 
       <div class="cs-meta">
-        <div><span class="label">My role</span>Anaplan operator and business user, Portfolio Management</div>
+        <div><span class="label">My role</span>Anaplan operator on the business side. Maintained the model and playbook, set up funding buckets, trained users</div>
         <div><span class="label">Team</span>DT business, IT developers, DT Finance, 9 business groups</div>
         <div><span class="label">Timeline</span>March to June 2026, live July 1</div>
         <div><span class="label">Tools</span>Anaplan, MSPO, LUDP data platform, Power BI</div>
@@ -360,8 +366,9 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
 
       <div class="cs-block">
         <h3>The problem</h3>
-        <p>The Anaplan model was close to its size limit, which put the whole portfolio process at risk of an outage. The workspace was also set to expire on June 4, which gave the team less than three months to analyze, rebuild and test.</p>
-        <p>The hardest part was knowledge. After several rounds of staff turnover, nobody on the IT side fully understood how the model worked. The project team listed this as the top risk. As the person who used and maintained the model every day, I was the one who could explain it.</p>
+        <p>Since 2023 the portfolio had run on two tools. Programs, budgets and benefit cases lived in Anaplan, and the projects under them lived in MSPO. Every program went through a chain of approvals by the VRO, the platform leader and the bucket's finance owner before any project could start.</p>
+        <p>By 2026 the Anaplan model was close to its size limit, which put the whole process at risk of an outage, and the licenses were expensive. The workspace was also set to expire on June 4, which gave the team less than three months to move programs into MSPO, rebuild the logic and test it.</p>
+        <p>The hardest part was knowledge. After several rounds of staff turnover, nobody on the IT side fully understood how the model worked. The project team listed this as the top risk. I maintained the model, set up its funding buckets and trained the people who used it, so I was the one who could explain it.</p>
       </div>
 
       <div class="cs-block">
@@ -371,14 +378,14 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
             <div class="when">Requirements</div>
             <div>
               <h3>Mapped the old system so IT could build the new one</h3>
-              <p>I documented the fields, data logic and current workflows across four Anaplan modules and walked DT and IT through them. This became the starting point for the MSPO design, and it replaced the knowledge the team had lost.</p>
+              <p>I documented the fields, data logic and workflows across four Anaplan modules, including who could see and approve what for each role, from program owners to finance. I walked DT and IT through them, and this became the starting point for the MSPO design. It replaced the knowledge the team had lost. Because users brought their questions to me, I could also point out where people got stuck, not just how the system worked.</p>
             </div>
           </article>
           <article class="entry">
             <div class="when">Process design</div>
             <div>
               <h3>Cut steps out of program setup</h3>
-              <p>Moving systems was a chance to drop work that PMs found painful and nobody really used. We removed the program resource demand input and the benefit split by BU and GEO, and added a priority field that portfolio reviews actually needed.</p>
+              <p>Creating a program in Anaplan meant filling in six separate pages, from budget and resource plans to deliverables and benefit cases. Moving systems was a chance to drop the parts PMs found painful and few people used. We removed the program resource demand input and the benefit split by BU and GEO, and added a priority field that portfolio reviews actually needed.</p>
               <div class="cs-steps" role="img" aria-label="Program process steps went from 31 to 20">
                 <div class="cs-steprow"><small>Before · 31</small><div class="cs-cells" data-n="31"></div></div>
                 <div class="cs-steprow"><small>After · 20</small><div class="cs-cells after" data-n="20"></div></div>
@@ -388,8 +395,8 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
           <article class="entry">
             <div class="when">Finance</div>
             <div>
-              <h3>Sent finance approvals to the right person automatically</h3>
-              <p>This was the change finance cared about most. At peak there were about 50 purchase requests a day.</p>
+              <h3>Designed automatic routing for finance approvals</h3>
+              <p>This was the change finance cared about most, and I owned it. I sorted out which funding bucket belonged to which finance approver and set up that mapping in the new system. At peak there were about 50 purchase requests a day.</p>
               <div class="cs-compare">
                 <div><span class="label before">Before</span>Every program in MSPO went to DT Finance, no matter who the approver was in Anaplan. DT Finance then had to spot the ones paid for by a business unit and find that unit's controller by hand.</div>
                 <div><span class="label">After</span>When a program is created, it goes into a funding bucket that names its approver. That approver syncs to MSPO, so each request goes straight to the right controller.</div>
@@ -409,7 +416,7 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
               <h3>Tested it like a real user before go-live</h3>
               <p>I wrote about 20 user cases based on how PMs and finance actually work, then ran them in UAT. They caught real gaps, such as</p>
               <ul>
-                <li>no way for an approver to delegate when they were away</li>
+                <li>no way for an approver to delegate when they were away, a feature Anaplan had that the first MSPO build missed</li>
                 <li>the second creator on a program could not edit it</li>
               </ul>
             </div>
@@ -422,8 +429,11 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
         <div class="cs-arch">
           <div class="cs-lane">
             <span class="label before" style="color: var(--muted)">Before</span>
-            <div class="cs-flow">
-              <div class="cs-node retired"><b>Anaplan</b><span>programs, budgets, approvals</span></div>
+            <div class="cs-flow mixed">
+              <div class="cs-stack">
+                <div class="cs-node retired"><b>Anaplan</b><span>programs, budgets, approvals</span></div>
+                <div class="cs-node"><b>MSPO</b><span>projects</span></div>
+              </div>
               <span class="cs-to" aria-hidden="true">→</span>
               <div class="cs-node"><b>LUDP</b><span>data platform</span></div>
               <span class="cs-to" aria-hidden="true">→</span>
@@ -433,7 +443,7 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
           <div class="cs-lane">
             <span class="label">After</span>
             <div class="cs-flow">
-              <div class="cs-node key"><b>MSPO on Azure</b><span>programs, budget allocation, approvals</span></div>
+              <div class="cs-node key"><b>MSPO on Azure</b><span>programs and projects in one place, budget allocation, approvals</span></div>
               <span class="cs-to" aria-hidden="true">→</span>
               <div class="cs-node"><b>Integration service</b><span>project info, budget, accounting data</span></div>
               <span class="cs-to" aria-hidden="true">→</span>
