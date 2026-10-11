@@ -206,6 +206,9 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
 .cs-flow.mixed > .cs-node { align-self: center; }
 .cs-stack { flex: 1 1 150px; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
 .cs-stack .cs-node { flex: none; }
+.cs-node.changed { border-color: var(--gold); background: #fbf6ec; }
+.cs-tag { display: block; font-style: normal; font-size: 10px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+.entry ul + .cs-steps, .entry ul + .cs-compare { margin-top: 16px; }
 .cs-to { align-self: center; color: var(--gold); flex: none; }
 .cs-note { font-size: 13px; color: var(--muted); }
 .cs-list { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 8px; max-width: 42em; }
@@ -348,7 +351,7 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
       <a class="back" href="#projects">← Back to projects</a>
 
       <h2>Anaplan to MSPO <span class="label">Case study · Lenovo</span></h2>
-      <p class="cs-lede">Lenovo's DT project portfolio was managed in Anaplan, which was hitting its limits and costing a lot in licenses. As the business-side owner of the tool, I helped move the process to Microsoft Project Online (MSPO) and made it simpler along the way.</p>
+      <p class="cs-lede">Lenovo's DT project portfolio was managed in Anaplan, which was hitting its limits and costing a lot in licenses. As the business-side owner of the tool, I led the business side of the move to Microsoft Project Online (MSPO), from requirements to testing, and made the process simpler along the way.</p>
 
       <div class="cs-meta">
         <div><span class="label">My role</span>Business-side system owner and key user</div>
@@ -375,15 +378,22 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
           <article class="entry">
             <div class="when">Requirements</div>
             <div>
-              <h3>Mapped the old system</h3>
-              <p>I documented the fields, logic and workflows of the Anaplan model and walked IT through them. This became the blueprint for the MSPO design.</p>
+              <h3>Gathered requirements and mapped the old system</h3>
+              <ul>
+                <li>Collected requirements from PMs, program creators across 9 business groups, and finance</li>
+                <li>Documented the fields, logic and workflows of four Anaplan modules</li>
+                <li>Turned both into a requirements package that IT used to design and build MSPO</li>
+              </ul>
             </div>
           </article>
           <article class="entry">
             <div class="when">Process</div>
             <div>
-              <h3>Cut steps from program setup</h3>
-              <p>We removed the program resource demand input and the benefit split by BU and GEO, which took PMs time but few people used, and added a priority field that reviews actually needed.</p>
+              <h3>Redesigned program setup</h3>
+              <ul>
+                <li>Removed the program resource demand input and the benefit split by BU and GEO, which took PMs time but few people used</li>
+                <li>Added a priority field that portfolio reviews needed</li>
+              </ul>
               <div class="cs-steps" role="img" aria-label="Program setup steps went from 31 to 20">
                 <div class="cs-steprow"><small>Before · 31</small><div class="cs-cells" data-n="31"></div></div>
                 <div class="cs-steprow"><small>After · 20</small><div class="cs-cells after" data-n="20"></div></div>
@@ -393,8 +403,11 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
           <article class="entry">
             <div class="when">Finance</div>
             <div>
-              <h3>Automated finance approvals</h3>
-              <p>I designed and set up the rules that send each request to the right finance approver.</p>
+              <h3>Designed and configured approval routing</h3>
+              <ul>
+                <li>Mapped every funding bucket to its finance approver</li>
+                <li>Set up the mapping so new programs carry their approver into MSPO automatically</li>
+              </ul>
               <div class="cs-compare">
                 <div><span class="label before">Before</span>Every request went to one central finance team, which had to find the right approver by hand.</div>
                 <div><span class="label">After</span>Each program's funding bucket names its approver, so requests go straight to the right person.</div>
@@ -402,17 +415,24 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
             </div>
           </article>
           <article class="entry">
-            <div class="when">Reporting</div>
+            <div class="when">Data &amp; reporting</div>
             <div>
-              <h3>Kept the dashboard running</h3>
-              <p>I worked with the data team to switch the leadership Power BI dashboard over to the new data source without a gap.</p>
+              <h3>Rebuilt the data flow end to end</h3>
+              <ul>
+                <li>Mapped Anaplan fields to their new MSPO fields</li>
+                <li>Worked with the data team to switch the data platform's source from Anaplan to MSPO</li>
+                <li>Updated the data paths behind the leadership Power BI dashboard and checked the numbers end to end</li>
+              </ul>
             </div>
           </article>
           <article class="entry">
             <div class="when">Testing</div>
             <div>
-              <h3>Tested it like a real user</h3>
-              <p>My test cases, based on real PM and finance work, caught gaps before launch, such as approvers being unable to delegate while away.</p>
+              <h3>Led user acceptance testing</h3>
+              <ul>
+                <li>Wrote about 20 test cases based on real PM and finance work</li>
+                <li>Ran them in UAT and logged the gaps for IT to fix, such as approvers being unable to delegate while away and second creators being unable to edit</li>
+              </ul>
             </div>
           </article>
         </div>
@@ -439,12 +459,13 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
             <div class="cs-flow mixed">
               <div class="cs-node key"><b>MSPO</b><span>programs, projects and approvals in one place</span></div>
               <span class="cs-to" aria-hidden="true">→</span>
-              <div class="cs-node"><b>Data platform</b></div>
+              <div class="cs-node changed"><em class="cs-tag">Updated</em><b>Data platform</b><span>new source and field mapping</span></div>
               <span class="cs-to" aria-hidden="true">→</span>
-              <div class="cs-node"><b>Power BI</b><span>leadership dashboard</span></div>
+              <div class="cs-node changed"><em class="cs-tag">Updated</em><b>Power BI</b><span>dashboard repointed to new data</span></div>
             </div>
           </div>
         </div>
+        <p class="cs-note">Every step in the chain changed, and I worked on each one, from the source system to the dashboard.</p>
       </div>
 
       <div class="cs-block">
