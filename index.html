@@ -192,7 +192,7 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
 .cs-cells.after i { background: var(--navy); }
 .cs-compare { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); margin-top: 16px; max-width: 42em; }
 .cs-compare div { background: var(--surface); padding: 18px 20px; font-size: 15px; line-height: 1.6; display: flex; flex-direction: column; gap: 6px; }
-.cs-compare .label.before { color: var(--muted); }
+.cs-lane .label.before, .cs-compare .label.before { color: var(--muted); }
 .cs-arch { background: var(--surface); border: 1px solid var(--line); padding: 28px; display: flex; flex-direction: column; gap: 26px; }
 .cs-lane { display: flex; flex-direction: column; gap: 10px; }
 .cs-flow { display: flex; align-items: stretch; gap: 10px; flex-wrap: wrap; }
@@ -306,8 +306,8 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
         <article class="card">
           <div class="label">Lenovo · Anaplan · MSPO · Power BI</div>
           <h3>Moving a 200-program portfolio off Anaplan</h3>
-          <p class="kicker">Helped migrate Lenovo's DT project portfolio to Microsoft Project Online in under three months, and made the process simpler along the way.</p>
-          <div class="result"><span class="label">Result</span><br>~$296K yearly license cost removed, program steps cut from 31 to 20, and finance approvals now routed automatically through a bucket setup I designed</div>
+          <p class="kicker">Led the business side of moving Lenovo's DT project portfolio to Microsoft Project Online, and made the process simpler along the way.</p>
+          <div class="result"><span class="label">Result</span><br>~$300K yearly license savings, 35% fewer setup steps</div>
           <div class="links"><a href="#anaplan-migration">Read the case study ›</a></div>
         </article>
         <article class="card soon">
@@ -347,28 +347,26 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
     <section id="anaplan-migration" class="view" hidden>
       <a class="back" href="#projects">← Back to projects</a>
 
-      <h2>Anaplan to MSPO <span class="label">Case study · Lenovo · 2026</span></h2>
-      <p class="cs-lede">Lenovo's DT and IT project portfolio ran on an Anaplan model that was running out of room and costing a lot in licenses. I ran Anaplan day to day on the business side, kept its user playbook, trained its users and was the person they came to with questions. I helped move the whole process to Microsoft Project Online (MSPO) while making it simpler for the people who use it.</p>
+      <h2>Anaplan to MSPO <span class="label">Case study · Lenovo</span></h2>
+      <p class="cs-lede">Lenovo's DT project portfolio was managed in Anaplan, which was hitting its limits and costing a lot in licenses. As the business-side owner of the tool, I helped move the process to Microsoft Project Online (MSPO) and made it simpler along the way.</p>
 
       <div class="cs-meta">
-        <div><span class="label">My role</span>Anaplan operator on the business side. Maintained the model and playbook, set up funding buckets, trained users</div>
-        <div><span class="label">Team</span>DT business, IT developers, DT Finance, 9 business groups</div>
-        <div><span class="label">Timeline</span>March to June 2026, live July 1</div>
-        <div><span class="label">Tools</span>Anaplan, MSPO, LUDP data platform, Power BI</div>
+        <div><span class="label">My role</span>Business-side system owner and key user</div>
+        <div><span class="label">Team</span>DT business, IT and Finance</div>
+        <div><span class="label">Timeline</span>Under three months</div>
+        <div><span class="label">Tools</span>Anaplan, MSPO, Power BI</div>
       </div>
 
       <div class="cs-kpis" aria-label="Results">
-        <div><b>~$296K</b><span>yearly Anaplan license cost removed after the old model was retired</span></div>
-        <div><b>31 → 20</b><span>steps to set up and manage a program, about 35% fewer</span></div>
-        <div><b>200+</b><span>programs moved, across 9 business groups and 50 PMs</span></div>
-        <div><b>~20</b><span>UAT user cases written and run before go-live</span></div>
+        <div><b>~$300K</b><span>yearly license cost saved once Anaplan was retired</span></div>
+        <div><b>31 → 20</b><span>steps to set up a program, about 35% fewer</span></div>
+        <div><b>200+</b><span>programs moved across 9 business groups</span></div>
+        <div><b>~20</b><span>test cases written and run before go-live</span></div>
       </div>
 
       <div class="cs-block">
         <h3>The problem</h3>
-        <p>Since 2023 the portfolio had run on two tools. Programs, budgets and benefit cases lived in Anaplan, and the projects under them lived in MSPO. Every program went through a chain of approvals by the VRO, the platform leader and the bucket's finance owner before any project could start.</p>
-        <p>By 2026 the Anaplan model was close to its size limit, which put the whole process at risk of an outage, and the licenses were expensive. The workspace was also set to expire on June 4, which gave the team less than three months to move programs into MSPO, rebuild the logic and test it.</p>
-        <p>The hardest part was knowledge. After several rounds of staff turnover, nobody on the IT side fully understood how the model worked. The project team listed this as the top risk. I maintained the model, set up its funding buckets and trained the people who used it, so I was the one who could explain it.</p>
+        <p>The old Anaplan model was running out of room and its license was about to expire, so the team had a short window to move. After years of staff turnover, few people still understood how the model worked. I maintained it, set up its funding buckets and trained its users, so I became the bridge between the old system and the new one.</p>
       </div>
 
       <div class="cs-block">
@@ -377,16 +375,16 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
           <article class="entry">
             <div class="when">Requirements</div>
             <div>
-              <h3>Mapped the old system so IT could build the new one</h3>
-              <p>I documented the fields, data logic and workflows across four Anaplan modules, including who could see and approve what for each role, from program owners to finance. I walked DT and IT through them, and this became the starting point for the MSPO design. It replaced the knowledge the team had lost. Because users brought their questions to me, I could also point out where people got stuck, not just how the system worked.</p>
+              <h3>Mapped the old system</h3>
+              <p>I documented the fields, logic and workflows of the Anaplan model and walked IT through them. This became the blueprint for the MSPO design.</p>
             </div>
           </article>
           <article class="entry">
-            <div class="when">Process design</div>
+            <div class="when">Process</div>
             <div>
-              <h3>Cut steps out of program setup</h3>
-              <p>Creating a program in Anaplan meant filling in six separate pages, from budget and resource plans to deliverables and benefit cases. Moving systems was a chance to drop the parts PMs found painful and few people used. We removed the program resource demand input and the benefit split by BU and GEO, and added a priority field that portfolio reviews actually needed.</p>
-              <div class="cs-steps" role="img" aria-label="Program process steps went from 31 to 20">
+              <h3>Cut steps from program setup</h3>
+              <p>We removed the program resource demand input and the benefit split by BU and GEO, which took PMs time but few people used, and added a priority field that reviews actually needed.</p>
+              <div class="cs-steps" role="img" aria-label="Program setup steps went from 31 to 20">
                 <div class="cs-steprow"><small>Before · 31</small><div class="cs-cells" data-n="31"></div></div>
                 <div class="cs-steprow"><small>After · 20</small><div class="cs-cells after" data-n="20"></div></div>
               </div>
@@ -395,30 +393,26 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
           <article class="entry">
             <div class="when">Finance</div>
             <div>
-              <h3>Designed automatic routing for finance approvals</h3>
-              <p>This was the change finance cared about most, and I owned it. I sorted out which funding bucket belonged to which finance approver and set up that mapping in the new system. At peak there were about 50 purchase requests a day.</p>
+              <h3>Automated finance approvals</h3>
+              <p>I designed and set up the rules that send each request to the right finance approver.</p>
               <div class="cs-compare">
-                <div><span class="label before">Before</span>Every program in MSPO went to DT Finance, no matter who the approver was in Anaplan. DT Finance then had to spot the ones paid for by a business unit and find that unit's controller by hand.</div>
-                <div><span class="label">After</span>When a program is created, it goes into a funding bucket that names its approver. That approver syncs to MSPO, so each request goes straight to the right controller.</div>
+                <div><span class="label before">Before</span>Every request went to one central finance team, which had to find the right approver by hand.</div>
+                <div><span class="label">After</span>Each program's funding bucket names its approver, so requests go straight to the right person.</div>
               </div>
             </div>
           </article>
           <article class="entry">
             <div class="when">Reporting</div>
             <div>
-              <h3>Kept the DT Dashboard running</h3>
-              <p>Leadership tracks the portfolio in a Power BI dashboard fed through LUDP, Lenovo's data platform. I worked with the data team to repoint the dashboard's data path from Anaplan to MSPO and check that the numbers still matched.</p>
+              <h3>Kept the dashboard running</h3>
+              <p>I worked with the data team to switch the leadership Power BI dashboard over to the new data source without a gap.</p>
             </div>
           </article>
           <article class="entry">
             <div class="when">Testing</div>
             <div>
-              <h3>Tested it like a real user before go-live</h3>
-              <p>I wrote about 20 user cases based on how PMs and finance actually work, then ran them in UAT. They caught real gaps, such as</p>
-              <ul>
-                <li>no way for an approver to delegate when they were away, a feature Anaplan had that the first MSPO build missed</li>
-                <li>the second creator on a program could not edit it</li>
-              </ul>
+              <h3>Tested it like a real user</h3>
+              <p>My test cases, based on real PM and finance work, caught gaps before launch, such as approvers being unable to delegate while away.</p>
             </div>
           </article>
         </div>
@@ -428,45 +422,41 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
         <h3>How the system fits together</h3>
         <div class="cs-arch">
           <div class="cs-lane">
-            <span class="label before" style="color: var(--muted)">Before</span>
+            <span class="label before">Before</span>
             <div class="cs-flow mixed">
               <div class="cs-stack">
-                <div class="cs-node retired"><b>Anaplan</b><span>programs, budgets, approvals</span></div>
+                <div class="cs-node retired"><b>Anaplan</b><span>programs and budgets</span></div>
                 <div class="cs-node"><b>MSPO</b><span>projects</span></div>
               </div>
               <span class="cs-to" aria-hidden="true">→</span>
-              <div class="cs-node"><b>LUDP</b><span>data platform</span></div>
+              <div class="cs-node"><b>Data platform</b></div>
               <span class="cs-to" aria-hidden="true">→</span>
-              <div class="cs-node"><b>Power BI</b><span>DT Dashboard</span></div>
+              <div class="cs-node"><b>Power BI</b><span>leadership dashboard</span></div>
             </div>
           </div>
           <div class="cs-lane">
             <span class="label">After</span>
-            <div class="cs-flow">
-              <div class="cs-node key"><b>MSPO on Azure</b><span>programs and projects in one place, budget allocation, approvals</span></div>
+            <div class="cs-flow mixed">
+              <div class="cs-node key"><b>MSPO</b><span>programs, projects and approvals in one place</span></div>
               <span class="cs-to" aria-hidden="true">→</span>
-              <div class="cs-node"><b>Integration service</b><span>project info, budget, accounting data</span></div>
+              <div class="cs-node"><b>Data platform</b></div>
               <span class="cs-to" aria-hidden="true">→</span>
-              <div class="cs-node"><b>LUDP</b><span>data platform</span></div>
-              <span class="cs-to" aria-hidden="true">→</span>
-              <div class="cs-node"><b>Power BI</b><span>DT Dashboard</span></div>
+              <div class="cs-node"><b>Power BI</b><span>leadership dashboard</span></div>
             </div>
           </div>
-          <p class="cs-note">Simplified view. MSPO also connects to finance and procurement systems that were outside my scope.</p>
         </div>
       </div>
 
       <div class="cs-block">
         <h3>Outcome</h3>
-        <p>UAT started in early June. I handed over the open test issues when I left to start my MSBA, and the new system went live on July 1. Anaplan has since been shut down, and the license savings are real.</p>
+        <p>I handed over testing when I left for my MSBA, and the new system went live soon after. Anaplan has been shut down, and the team now works in one tool instead of two.</p>
       </div>
 
       <div class="cs-block">
         <h3>What I took away</h3>
         <ul class="cs-list">
           <li>When the people who built a system are gone, clear documentation is the most valuable thing you can deliver.</li>
-          <li>A migration is the cheapest moment to remove steps. Asking who actually uses a field saved PMs more time than any new feature.</li>
-          <li>Edge cases matter. Delegation and shared ownership look small in a spec but are big in daily work, and they only showed up because we tested with real scenarios.</li>
+          <li>A migration is the cheapest moment to remove steps people don't need.</li>
         </ul>
       </div>
 
