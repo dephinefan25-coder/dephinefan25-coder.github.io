@@ -209,6 +209,15 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
 .cs-node.changed { border-color: var(--gold); background: #fbf6ec; }
 .cs-tag { display: block; font-style: normal; font-size: 10px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
 .entry ul + .cs-steps, .entry ul + .cs-compare { margin-top: 16px; }
+.cs-figure { margin: 16px 0 0; max-width: 42em; display: flex; flex-direction: column; gap: 8px; }
+.cs-figure img { width: 100%; height: auto; display: block; background: #ffffff; border: 1px solid var(--line); }
+.cs-tablewrap { overflow-x: auto; max-width: 42em; margin-top: 16px; }
+.cs-table { width: 100%; border-collapse: collapse; font-size: 14.5px; font-variant-numeric: tabular-nums; background: var(--surface); border: 1px solid var(--line); }
+.cs-table th, .cs-table td { padding: 10px 14px; border-bottom: 1px solid var(--line); text-align: right; white-space: nowrap; }
+.cs-table th { font-size: 10.5px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); }
+.cs-table th:first-child, .cs-table td:first-child { text-align: left; }
+.cs-table tr.pick td { font-weight: 600; color: var(--navy); }
+.cs-links { display: flex; gap: 20px; flex-wrap: wrap; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
 .cs-to { align-self: center; color: var(--gold); flex: none; }
 .cs-note { font-size: 13px; color: var(--muted); }
 .cs-list { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 8px; max-width: 42em; }
@@ -313,9 +322,12 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
           <div class="result"><span class="label">Result</span><br>~$300K yearly license savings, 35% fewer setup steps</div>
           <div class="links"><a href="#anaplan-migration">Read the case study ›</a></div>
         </article>
-        <article class="card soon">
-          <span class="label">Coming soon</span>
-          <p>My analytics projects from the UW Foster MSBA program will be added here.</p>
+        <article class="card">
+          <div class="label">UW Foster MSBA · Machine Learning</div>
+          <h3>Predicting Checkout Spend to Target Free Shipping</h3>
+          <p class="kicker">Built a regression model that predicts each shopper's checkout spend, so free shipping goes only to shoppers likely to spend $150 or more.</p>
+          <div class="result"><span class="label">Result</span><br>Prediction error cut from $42 to $22 per shopper, using 7 of 103 inputs</div>
+          <div class="links"><a href="#checkout-spend">Read the case study ›</a><a href="https://colab.research.google.com/drive/1vGlTcm4dl4eT-Woq-GvtQpUlVDeaCPGC?usp=sharing" target="_blank" rel="noopener">Code ↗</a></div>
         </article>
       </div>
       <!-- Project card template, restore when projects are ready:
@@ -469,6 +481,122 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
           <li>When the people who built a system are gone, clear documentation is the most valuable thing you can deliver.</li>
           <li>Digital transformation is less about upgrading the system and more about rethinking the business process behind it.</li>
         </ul>
+      </div>
+
+      <a class="back" href="#projects">← Back to projects</a>
+    </section>
+
+    <!-- ===== 编辑：案例 Checkout spend 预测（从 Projects 进入） ===== -->
+    <section id="checkout-spend" class="view" hidden>
+      <a class="back" href="#projects">← Back to projects</a>
+
+      <h2>Predicting Checkout Spend to Target Free Shipping <span class="label">Case study · UW Foster MSBA</span></h2>
+      <p class="cs-lede">I built a regression model that predicts how much each shopper will spend at checkout, so an online retailer can offer free shipping only to shoppers likely to spend $150 or more. My recommended Lasso model cut the typical prediction error from $42 to about $22, using only 7 of 103 possible inputs.</p>
+
+      <div class="cs-meta">
+        <div><span class="label">Decision</span>Who gets free shipping, which costs $8 per order</div>
+        <div><span class="label">Data</span>1,500 checkout sessions, 15 candidate features</div>
+        <div><span class="label">Methods</span>OLS, cross-validation, Ridge, Lasso</div>
+        <div><span class="label">Tools</span>Python, pandas, scikit-learn</div>
+      </div>
+
+      <div class="cs-kpis" aria-label="Results">
+        <div><b>$42 → $22</b><span>typical prediction error per shopper</span></div>
+        <div><b>7 of 103</b><span>inputs kept by the final model</span></div>
+        <div><b>72%</b><span>of offers went to shoppers who really spent $150+</span></div>
+        <div><b>$104</b><span>wasted-offer cost, lowest of all models tested</span></div>
+      </div>
+
+      <div class="cs-links"><a href="https://colab.research.google.com/drive/1vGlTcm4dl4eT-Woq-GvtQpUlVDeaCPGC?usp=sharing" target="_blank" rel="noopener">View the code in Google Colab ↗</a></div>
+
+      <div class="cs-block">
+        <h3>The problem</h3>
+        <p>OmniShop wanted to spend its free-shipping budget only on shoppers who would spend at least $150. Finance assumed every shopper spends the average of about $113, a guess that is off by about $42 for a typical shopper and cannot tell a $60 shopper from a $180 one. I turned this into a regression problem: predict each shopper's spend in dollars, then use the prediction to decide who gets the offer.</p>
+      </div>
+
+      <div class="cs-block">
+        <h3>What I did</h3>
+        <div class="timeline">
+          <article class="entry">
+            <div class="when">Set the bar</div>
+            <div>
+              <h3>Started from the simplest guess</h3>
+              <ul>
+                <li>Held back 30% of sessions as a test set and kept it untouched until the final check</li>
+                <li>Used the average spend as a baseline, then fit OLS on the 4 features the team trusted most</li>
+              </ul>
+            </div>
+          </article>
+          <article class="entry">
+            <div class="when">Check the errors</div>
+            <div>
+              <h3>Found 8 orders skewing every prediction</h3>
+              <ul>
+                <li>A residual plot showed 8 VIP orders of $1,000+ pulling predictions up by about $9</li>
+                <li>Since the VIP team already serves these shoppers, I modeled standard shoppers only, which halved the error and lifted R² from 0.10 to 0.73</li>
+              </ul>
+            </div>
+          </article>
+          <article class="entry">
+            <div class="when">Avoid overfitting</div>
+            <div>
+              <h3>Showed that more features made it worse</h3>
+              <ul>
+                <li>Added all 15 features one group at a time and compared training error with 5-fold cross-validation</li>
+                <li>Error on new shoppers was lowest at 4 inputs and rose as noise like region and session hour came in</li>
+              </ul>
+              <figure class="cs-figure">
+                <img src="photos/checkout-cv-chart.png" alt="Line chart: cross-validation error is lowest at 4 inputs ($21.60) and rises to $22.65 at 103 inputs, while training error keeps falling to $20.14" loading="lazy">
+                <figcaption class="cs-note">Training error kept falling, but error on new shoppers bottomed out at 4 inputs.</figcaption>
+              </figure>
+            </div>
+          </article>
+          <article class="entry">
+            <div class="when">Regularize</div>
+            <div>
+              <h3>Let Lasso pick the real drivers</h3>
+              <ul>
+                <li>Tuned Ridge and Lasso inside a pipeline so scaling and encoding never leaked test data</li>
+                <li>Lasso zeroed out 96 of 103 inputs and kept the same top drivers the team trusted: past order value, recommended items, pages viewed and discount</li>
+                <li>It also dropped session length, which plain OLS gave a confusing negative weight because it moves with pages viewed</li>
+              </ul>
+            </div>
+          </article>
+          <article class="entry">
+            <div class="when">Test in dollars</div>
+            <div>
+              <h3>Turned predictions into a business decision</h3>
+              <ul>
+                <li>Applied each model to the $150 rule on 448 test shoppers, 54 of whom really spent $150+, and counted wasted offers, missed high spenders and cost</li>
+              </ul>
+              <div class="cs-tablewrap">
+                <table class="cs-table">
+                  <thead><tr><th>Model</th><th>Offers</th><th>Wasted</th><th>Missed</th><th>Wasted cost</th></tr></thead>
+                  <tbody>
+                    <tr class="pick"><td>Lasso</td><td>47</td><td>13</td><td>20</td><td>$104</td></tr>
+                    <tr><td>Full OLS</td><td>52</td><td>15</td><td>17</td><td>$120</td></tr>
+                    <tr><td>Trained with VIP orders</td><td>60</td><td>21</td><td>15</td><td>$168</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="cs-block">
+        <h3>Recommendation</h3>
+        <p>I recommended Lasso. It is nearly as accurate as the best model, uses only 7 inputs a revenue leader can understand, and wasted the least money. The trade-off is that it missed 20 of 54 high spenders, so I proposed logging every shopper after launch, tracking near-misses just under $150, and running a small holdout group to measure whether free shipping actually raises spend.</p>
+      </div>
+
+      <div class="cs-block">
+        <h3>What I took away</h3>
+        <ul class="cs-list">
+          <li>A better score on training data can mean a worse model on new customers.</li>
+          <li>Looking at the errors, not just the score, found the 8 orders behind most of the problem.</li>
+          <li>Reporting results in dollars made the model choice a business decision, not only a technical one.</li>
+        </ul>
+        <p class="cs-note">From the BUS AN 517 (ML/AI Methods and Applications) case study in the UW Foster MSBA. OmniShop is fictional and the data is synthetic; the analysis and recommendation are my own.</p>
       </div>
 
       <a class="back" href="#projects">← Back to projects</a>
