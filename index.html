@@ -80,6 +80,8 @@ strong, b { font-weight: 600; }
 
 /* Views */
 main { min-width: 0; }
+body:not(.is-detail) .view:not(.detail) > .back { display: none; }
+body:not(.is-detail) .view:not(.detail) { padding-top: 88px; }
 .view { display: flex; flex-direction: column; gap: 32px; padding-top: 64px; padding-bottom: 8px; animation: rise .6s cubic-bezier(.2,.8,.2,1); }
 @keyframes rise { from { opacity: .3; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 .back { align-self: flex-start; font-size: 11px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); }
@@ -367,7 +369,7 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
     </section>
 
     <!-- ===== 编辑：案例 Anaplan → MSPO 迁移（从 Projects 进入） ===== -->
-    <section id="anaplan-migration" class="view" hidden>
+    <section id="anaplan-migration" class="view detail" hidden>
       <a class="back" href="#projects">← Back to projects</a>
 
       <h2>Project Management System Migration <span class="label">Case study</span></h2>
@@ -495,7 +497,7 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
     </section>
 
     <!-- ===== 编辑：案例 Checkout spend 预测（从 Projects 进入） ===== -->
-    <section id="checkout-spend" class="view" hidden>
+    <section id="checkout-spend" class="view detail" hidden>
       <a class="back" href="#projects">← Back to projects</a>
 
       <h2>Predicting Checkout Spend to Target Free Shipping <span class="label">Case study · UW Foster MSBA</span></h2>
@@ -611,7 +613,7 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
     </section>
 
     <!-- ===== 编辑：项目 Littlefield 供应链与运营（从 Projects 进入） ===== -->
-    <section id="littlefield-operations" class="view" hidden>
+    <section id="littlefield-operations" class="view detail" hidden>
       <a class="back" href="#projects">← Back to projects</a>
 
       <h2>Factory Capacity and Inventory Strategy <span class="label">Case study · UW Foster MSBA</span></h2>
@@ -816,14 +818,25 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
   var home = document.getElementById('home');
   var footer = document.querySelector('footer');
   var views = Array.prototype.slice.call(document.querySelectorAll('.view'));
+  var first = true;
   function show() {
     var id = (location.hash || '').slice(1);
-    var target = null;
-    views.forEach(function (v) { var on = v.id === id; v.hidden = !on; if (on) target = v; });
-    home.hidden = !!target;
-    if (footer) footer.hidden = !target;
-    window.scrollTo(0, 0);
-    if (target) { var h = target.querySelector('h2'); if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); } }
+    var target = id ? document.getElementById(id) : null;
+    if (target && views.indexOf(target) < 0) target = null;
+    var detail = !!(target && target.classList.contains('detail'));
+    document.body.classList.toggle('is-detail', detail);
+    views.forEach(function (v) { v.hidden = detail ? v !== target : v.classList.contains('detail'); });
+    home.hidden = detail;
+    if (footer) footer.hidden = false;
+    if (detail) {
+      window.scrollTo(0, 0);
+      var h = target.querySelector('h2'); if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); }
+    } else if (target) {
+      target.scrollIntoView({ behavior: first ? 'auto' : 'smooth', block: 'start' });
+    } else {
+      window.scrollTo({ top: 0, behavior: first ? 'auto' : 'smooth' });
+    }
+    first = false;
   }
   Array.prototype.forEach.call(document.querySelectorAll('.cs-cells'), function (el) {
     var n = parseInt(el.getAttribute('data-n'), 10) || 0;
