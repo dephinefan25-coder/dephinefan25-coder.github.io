@@ -339,6 +339,13 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
           <div class="result"><span class="label">Result</span><br>Ranked No. 1 in the class with $2.44M final cash</div>
           <div class="links"><a href="#littlefield-operations">Read the project ›</a></div>
         </article>
+        <article class="card">
+          <div class="label">UW Foster MSBA · SQL &amp; Data Analysis</div>
+          <h3>EV Adoption Across Washington State</h3>
+          <p class="kicker">Cleaned and joined four public datasets in MySQL to see which counties are going electric, what they buy, and whether income matters.</p>
+          <div class="result"><span class="label">Result</span><br>~290K EV records analyzed; cities go fully electric, rural counties buy longer range</div>
+          <div class="links"><a href="#ev-adoption">Read the project ›</a><a href="https://github.com/dephinefan25-coder/dephinefan25-coder.github.io/tree/main/projects/ev-adoption" target="_blank" rel="noopener">Data &amp; code ↗</a></div>
+        </article>
       </div>
       <!-- Project card template, restore when projects are ready:
       <div class="projects">
@@ -713,6 +720,105 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
           <li>Capacity decisions should be priced in revenue, not just utilization: the extra machine paid off only because of the contract it unlocked.</li>
           <li>Timing matters as much as the decision itself; raising the price before the backlog cleared would have earned penalties.</li>
           <li>Knowing when to stop buying is part of inventory planning.</li>
+        </ul>
+      </div>
+
+      <a class="back" href="#projects">← Back to projects</a>
+    </section>
+
+    <!-- ===== 编辑：项目 EV adoption（从 Projects 进入） ===== -->
+    <section id="ev-adoption" class="view detail" hidden>
+      <a class="back" href="#projects">← Back to projects</a>
+
+      <h2>EV Adoption Across Washington State <span class="label">Case study · UW Foster MSBA</span></h2>
+      <p class="cs-lede">A team analysis of about 290,000 registered electric vehicles in Washington, asking which counties are adopting fastest, what kinds of EVs they buy, and whether income plays a role. I handled the data cleaning across four tables in MySQL and built the county-level analysis of electric share and range.</p>
+
+      <div class="cs-meta">
+        <div><span class="label">Team</span>Five MSBA classmates</div>
+        <div><span class="label">Data</span>WA DOL registry, county income, EV model specs</div>
+        <div><span class="label">Methods</span>Cleaning, joins, window functions, aggregation</div>
+        <div><span class="label">Tools</span>MySQL</div>
+      </div>
+
+      <div class="cs-kpis" aria-label="Results">
+        <div><b>~290K</b><span>EV records cleaned and analyzed</span></div>
+        <div><b>4</b><span>public datasets joined by county</span></div>
+        <div><b>30%+</b><span>of 2025 registrations electric in Pierce, Clark and Snohomish</span></div>
+        <div><b>41.8%</b><span>of EVs fall in the 300–350 mile range band</span></div>
+      </div>
+
+      <div class="cs-links"><a href="https://github.com/dephinefan25-coder/dephinefan25-coder.github.io/tree/main/projects/ev-adoption" target="_blank" rel="noopener">View data, SQL and slides on GitHub ↗</a></div>
+
+      <div class="cs-block">
+        <h3>The problem</h3>
+        <p>Utilities, automakers and policymakers all need to know where EV adoption is growing and what drives it, to plan grid capacity, stock the right models and target incentives. The team set out to answer three questions: which Washington counties are growing EV adoption fastest, whether buyers choose high-range models or affordable ones, and whether clean-fuel eligibility and household income relate to adoption.</p>
+      </div>
+
+      <div class="cs-block">
+        <h3>What I did</h3>
+        <div class="timeline">
+          <article class="entry">
+            <div class="when">Clean the data</div>
+            <div>
+              <h3>Made four tables join cleanly</h3>
+              <ul>
+                <li>Set unreported electric range of 0 to NULL, so missing values no longer pulled averages down</li>
+                <li>Kept only the latest re-registration per vehicle with ROW_NUMBER(), and dropped non-WA and blank-county rows</li>
+                <li>Trimmed county names, stripped commas from income figures, and aligned the year key so every table joined on county</li>
+                <li>Pre-aggregated model specs to one row per brand to avoid double counting on the join, and converted range from km to miles</li>
+              </ul>
+            </div>
+          </article>
+          <article class="entry">
+            <div class="when">Set the scope</div>
+            <div>
+              <h3>Kept the comparisons reliable</h3>
+              <ul>
+                <li>Limited the analysis to model years 2011–2025, the only span with complete registration data</li>
+                <li>Used 2022–2023 for growth, since newer vehicles were not all registered yet, and required at least 20 EVs per county so small counties would not show misleading growth rates</li>
+                <li>Grouped vehicles into short, mid and long range tiers, with unknown range kept as its own group</li>
+              </ul>
+            </div>
+          </article>
+          <article class="entry">
+            <div class="when">Analyze by county</div>
+            <div>
+              <h3>Compared electric share and range across counties</h3>
+              <ul>
+                <li>Wrote the queries for battery-electric share and average battery-electric range by county, which became the two county maps</li>
+                <li>Found that cities go most electric, above 80% in Snohomish, while coastal and remote counties such as Pacific (64%) lean on plug-in hybrids</li>
+                <li>Found that inland counties buy the longest-range EVs, above 220 miles on average, while islands and the coast sit at 160–180 miles</li>
+              </ul>
+              <figure class="cs-figure">
+                <img src="photos/ev-bev-share-map.png" alt="Map of Washington counties shaded by battery-electric share of EVs, highest in the Seattle-area counties and lowest along the coast" loading="lazy">
+                <figcaption class="cs-note">Battery-electric share of EVs by county. Dense urban counties lead; coastal and remote counties rely more on hybrids.</figcaption>
+              </figure>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="cs-block">
+        <h3>What the team found</h3>
+        <ul class="cs-list">
+          <li><b>Volume is not adoption.</b> King County has the most EVs but ranks 4th by adoption rate; Pierce, Clark and Snohomish each passed 30% of 2025 registrations.</li>
+          <li><b>Growth is moving to smaller counties.</b> Grays Harbor, Douglas and Pacific grew fastest from 2022 to 2023.</li>
+          <li><b>Charging access shapes the choice.</b> Cities with dense chargers and short trips buy pure electric; rural drivers keep a hybrid or buy longer range.</li>
+          <li><b>Income is a weak signal.</b> It barely relates to clean-fuel eligibility (r ≈ −0.29) or range, and lower-income counties with high adoption are still led by Tesla.</li>
+          <li><b>The market is concentrated.</b> Tesla has about six times the registrations of the next brand, and 41.8% of EVs sit in the 300–350 mile band.</li>
+        </ul>
+        <figure class="cs-figure">
+          <img src="photos/ev-adoption-rate.png" alt="Bar chart of the top 15 Washington counties by EV share of 2025 new registrations, led by Pierce, Clark, Snohomish and King" loading="lazy">
+          <figcaption class="cs-note">Top 15 counties by EV share of 2025 new registrations.</figcaption>
+        </figure>
+      </div>
+
+      <div class="cs-block">
+        <h3>What I took away</h3>
+        <ul class="cs-list">
+          <li>Most of the work in a multi-source analysis is making the keys match; one untrimmed county name can silently drop rows from every join.</li>
+          <li>A zero is not always a zero. Unreported range had to be treated as missing, or every range average would have been understated.</li>
+          <li>Knowing where the data stops being reliable, such as recent model years, matters as much as the analysis itself.</li>
         </ul>
       </div>
 
