@@ -144,7 +144,7 @@ h2:focus { outline: none; }
 /* Feature project cards: one color theme per project */
 .projects { grid-template-columns: minmax(0, 1fr); }
 .projects > .card.feature { --bg1: #d7ece6; --bg2: #e7f2ee; --bg3: #f3f7f3; --acc: #2b7a6c; --dark: #134e4a; --bar1: #1f6f68; --bar2: #3fae94;
-  border: 0; border-radius: 6px; padding: 26px 36px 26px 40px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 360px); gap: 36px; align-items: center; overflow: hidden; position: relative;
+  border: 0; border-radius: 6px; padding: 18px 32px 18px 40px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 300px); gap: 36px; align-items: center; overflow: hidden; position: relative;
   background: radial-gradient(120% 140% at 100% 0%, var(--bg1) 0%, var(--bg2) 45%, var(--bg3) 100%); color: var(--ink); border: 1px solid rgba(23,35,58,.06); }
 .projects > .card.f-pm, .cs-intro.f-pm { --bg1: #d9e2f0; --bg2: #e8eef6; --bg3: #f4f6f9; --acc: #3b5a8c; --dark: #1f3557; --bar1: #1f3557; --bar2: #5a7fc0; }
 .projects > .card.f-ship, .cs-intro.f-ship { --bg1: #f0dde4; --bg2: #f6e9ed; --bg3: #faf4f4; --acc: #9a4769; --dark: #5e2440; --bar1: #5e2440; --bar2: #c0618a; }
@@ -152,7 +152,7 @@ h2:focus { outline: none; }
 .mock-shot { display: block; width: 100%; height: auto; aspect-ratio: 16 / 7; object-fit: cover; object-position: top; border-radius: 4px; border: 1px solid var(--line); }
 .projects > .card.f-factory, .cs-intro.f-factory { --bg1: #f2e2cc; --bg2: #f7ecdd; --bg3: #faf5ec; --acc: #9a6224; --dark: #7a4518; --bar1: #7a4518; --bar2: #d48a3c; }
 .feature .f-text { display: flex; flex-direction: column; gap: 11px; }
-.projects > .card.feature .f-mock { zoom: .88; }
+.projects > .card.feature .f-mock { zoom: .76; }
 .f-eyebrow { font-size: 10px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--acc); }
 .projects > .card.feature h3 { font-family: var(--sans); font-weight: 700; font-size: clamp(20px, 2vw, 25px); line-height: 1.18; letter-spacing: -.02em; color: var(--ink); }
 .projects > .card.feature .kicker { font-size: 14px; color: var(--muted); max-width: 34em; }
@@ -1408,7 +1408,7 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
   var total = cards().length;
   if (total <= SHOW) { document.querySelector('.proj-ctrl').hidden = true; return; }
   function gap() { return parseFloat(getComputedStyle(list).rowGap) || 0; }
-  function heightOf(arr) { var h = 0, g = gap(); arr.forEach(function (c, i) { h += c.offsetHeight + (i ? g : 0); }); return h; }
+  function heightOf(arr) { var h = 0, g = gap(); arr.forEach(function (c, i) { h += c.getBoundingClientRect().height + (i ? g : 0); }); return Math.ceil(h) + 1; }
   function sync() {
     var c = cards();
     if (!busy) vp.style.height = heightOf(c.slice(0, SHOW)) + 'px';
