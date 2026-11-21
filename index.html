@@ -117,6 +117,14 @@ h2:focus { outline: none; }
 .skills { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
 .skills > div { display: flex; flex-direction: column; gap: 14px; padding: 32px; background: var(--surface); }
 .skills .row { display: flex; flex-wrap: wrap; gap: 8px; }
+.sub { font-family: var(--serif); font-weight: 600; font-size: 30px; line-height: 1.15; margin: 8px 0 20px; }
+.jobs + .sub { margin-top: 56px; }
+.jobs { display: flex; flex-direction: column; gap: 28px; }
+.job { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 24px; align-items: start; }
+.job-logo { width: 96px; height: 64px; display: grid; place-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; font-family: var(--serif); font-weight: 600; font-size: 20px; color: var(--navy); letter-spacing: .02em; }
+.job h4 { margin: 0; font-family: var(--serif); font-weight: 600; font-size: 24px; line-height: 1.2; color: var(--ink); }
+.job-when { margin-top: 6px; font-size: 15px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.job-meta { margin-top: 2px; font-size: 15px; color: var(--muted); }
 .skills .pill { font-size: 14px; padding: 6px 14px; border: 1px solid var(--line); border-radius: 2px; background: var(--bg); }
 
 .contact { display: flex; flex-direction: column; gap: 12px; font-size: 19px; }
@@ -156,6 +164,9 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
   .entry { grid-template-columns: minmax(0, 1fr); gap: 6px; }
   .school-logo { width: 72px; height: 40px; margin: 10px 0 4px; }
   .card, .skills > div { padding: 24px; }
+  .job { grid-template-columns: 72px minmax(0, 1fr); gap: 16px; }
+  .job-logo { width: 72px; height: 48px; font-size: 16px; }
+  .job h4 { font-size: 21px; }
 }
 .story { display: grid; grid-template-columns: minmax(0, 420fr) minmax(0, 93fr) minmax(0, 420fr); width: 100%; max-width: 1013px; margin-inline: auto; grid-auto-flow: row dense; column-gap: 40px; row-gap: 40px; align-items: center; }
 .story > p { grid-column: 1 / 3; font-size: 16px; line-height: 1.75; color: var(--ink); max-width: none; margin: 0; text-align: justify; hyphens: auto; }
@@ -280,7 +291,7 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
     <nav class="tiles" aria-label="Sections">
         <a class="tile t-experience" href="#experience"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2.5"/><path d="M8.5 7V5.5A1.5 1.5 0 0 1 10 4h4a1.5 1.5 0 0 1 1.5 1.5V7M3 12.5h18"/></svg></span><span class="tile-t">My Story</span><span class="tile-d">Lenovo, Source Code Capital, Kingsoft WPS</span><span class="arrow" aria-hidden="true">›</span></a>
         <a class="tile t-projects" href="#projects"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg></span><span class="tile-t">Projects</span><span class="tile-d">Lenovo case study and UW Foster analytics work</span><span class="arrow" aria-hidden="true">›</span></a>
-        <a class="tile t-skills" href="#skills"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.4 5.2L20 9l-4.2 3.8L17 18.5 12 15.6 7 18.5l1.2-5.7L4 9l5.6-.8z"/></svg></span><span class="tile-t">Skills</span><span class="tile-d">SQL, Python, Power BI, Excel, CFA</span><span class="arrow" aria-hidden="true">›</span></a>
+        <a class="tile t-skills" href="#skills"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2.4 5.2L20 9l-4.2 3.8L17 18.5 12 15.6 7 18.5l1.2-5.7L4 9l5.6-.8z"/></svg></span><span class="tile-t">Experience &amp; Skills</span><span class="tile-d">SQL, Python, Power BI, Excel, CFA</span><span class="arrow" aria-hidden="true">›</span></a>
         <a class="tile t-education" href="#education"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9l10-5 10 5-10 5z"/><path d="M6 11v5c0 1.7 2.7 3 6 3s6-1.3 6-3v-5M22 9v6"/></svg></span><span class="tile-t">Education</span><span class="tile-d">UW Foster, ESCP Paris, Xiamen University</span><span class="arrow" aria-hidden="true">›</span></a>
         <a class="tile t-interests" href="#interests"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7.5-4.6-7.5-10A4.3 4.3 0 0 1 12 7.4 4.3 4.3 0 0 1 19.5 10c0 5.4-7.5 10-7.5 10z"/></svg></span><span class="tile-t">Interests</span><span class="tile-d">Outdoors, reading and travel</span><span class="arrow" aria-hidden="true">›</span></a>
         <a class="tile t-contact" href="#contact"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.5 6.5l8.5 6.5 8.5-6.5"/></svg></span><span class="tile-t">Contact</span><span class="tile-d">Email, LinkedIn and resume</span><span class="arrow" aria-hidden="true">›</span></a>
@@ -804,11 +815,40 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
       <a class="back" href="#projects">← Back to projects</a>
     </section>
 
-    <!-- ===== 编辑：Skills 技能 ===== -->
+    <!-- ===== 编辑：Work Experience & Skills 工作经历与技能 ===== -->
     <section id="skills" class="view" hidden>
       <a class="back" href="#">↑ Back to top</a>
 
-      <h2>Skills</h2>
+      <h2>Work Experience &amp; Skills</h2>
+      <h3 class="sub">Work Experience</h3>
+      <div class="jobs">
+        <article class="job">
+          <div class="job-logo" aria-hidden="true">Lenovo</div>
+          <div>
+            <h4>Strategy &amp; Operations Specialist @ Lenovo Group</h4>
+            <div class="job-when">Aug 2023 – Jun 2026</div>
+            <div class="job-meta">Digital Transformation Office · Beijing</div>
+          </div>
+        </article>
+        <article class="job">
+          <div class="job-logo" aria-hidden="true">SCC</div>
+          <div>
+            <h4>Post-Investment Service Intern @ Source Code Capital</h4>
+            <div class="job-when">Jun 2021 – Nov 2021</div>
+            <div class="job-meta">Post-Investment Department · Beijing</div>
+          </div>
+        </article>
+        <article class="job">
+          <div class="job-logo" aria-hidden="true">WPS</div>
+          <div>
+            <h4>Commercialization Operations Intern @ Kingsoft WPS Office</h4>
+            <div class="job-when">Mar 2021 – Jun 2021</div>
+            <div class="job-meta">Overseas Product Department · Beijing</div>
+          </div>
+        </article>
+      </div>
+
+      <h3 class="sub">Skills</h3>
       <div class="skills">
         <div><span class="label">Data &amp; analysis</span><div class="row"><span class="pill">SQL</span><span class="pill">Python</span><span class="pill">Excel</span><span class="pill">STATA</span><span class="pill">SPSS</span></div></div>
         <div><span class="label">Reporting &amp; systems</span><div class="row"><span class="pill">Power BI</span><span class="pill">Anaplan</span><span class="pill">Microsoft Project Operations</span></div></div>
