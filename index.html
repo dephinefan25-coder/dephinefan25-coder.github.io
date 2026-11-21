@@ -118,7 +118,10 @@ h2:focus { outline: none; }
 .skills > div { display: flex; flex-direction: column; gap: 14px; padding: 32px; background: var(--surface); }
 .skills .row { display: flex; flex-wrap: wrap; gap: 8px; }
 .sub { font-family: var(--serif); font-weight: 600; font-size: 30px; line-height: 1.15; margin: 8px 0 20px; }
-.jobs + .sub { margin-top: 56px; }
+.work-skills { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 56px; align-items: start; }
+.work-skills .skills { grid-template-columns: minmax(0, 1fr); }
+@media (max-width: 960px) { .work-skills { grid-template-columns: minmax(0, 1fr); gap: 40px; } .work-skills .skills { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .work-skills .skills { grid-template-columns: minmax(0, 1fr); } }
 .jobs { display: flex; flex-direction: column; gap: 28px; }
 .job { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 24px; align-items: start; }
 .job-logo { width: 96px; height: 64px; display: grid; place-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; padding: 10px; box-sizing: border-box; }
@@ -826,6 +829,8 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
       <a class="back" href="#">↑ Back to top</a>
 
       <h2>Work Experience &amp; Skills</h2>
+      <div class="work-skills">
+      <div>
       <h3 class="sub">Work Experience</h3>
       <div class="jobs">
         <article class="job">
@@ -854,12 +859,16 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
         </article>
       </div>
 
+      </div>
+      <div>
       <h3 class="sub">Skills</h3>
       <div class="skills">
         <div><span class="label">Data &amp; analysis</span><div class="row"><span class="pill">SQL</span><span class="pill">Python</span><span class="pill">Excel</span><span class="pill">STATA</span><span class="pill">SPSS</span></div></div>
         <div><span class="label">Reporting &amp; systems</span><div class="row"><span class="pill">Power BI</span><span class="pill">Anaplan</span><span class="pill">Microsoft Project Operations</span></div></div>
         <div><span class="label">Finance</span><div class="row"><span class="pill">CFA Level I &amp; II passed</span><span class="pill">Budget forecasting</span></div></div>
         <div><span class="label">Operations</span><div class="row"><span class="pill">Resource planning</span><span class="pill">Requirements &amp; testing</span></div></div>
+      </div>
+      </div>
       </div>
     </section>
 
