@@ -902,11 +902,17 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
   var footer = document.querySelector('footer');
   var views = Array.prototype.slice.call(document.querySelectorAll('.view'));
   var first = true;
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   function show() {
     var id = (location.hash || '').slice(1);
     var target = id ? document.getElementById(id) : null;
     if (target && views.indexOf(target) < 0) target = null;
     var detail = !!(target && target.classList.contains('detail'));
+    if (first && target && !detail) {
+      // Opening the site (or a saved link like #experience) always starts at the top of the home page
+      history.replaceState(null, '', location.pathname + location.search);
+      target = null;
+    }
     document.body.classList.toggle('is-detail', detail);
     views.forEach(function (v) { v.hidden = detail ? v !== target : v.classList.contains('detail'); });
     home.hidden = detail;
