@@ -102,6 +102,7 @@ h2:focus { outline: none; }
 
 .projects { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
 .projects > .card { border: 1px solid var(--line); }
+@media (max-width: 760px) { .projects { grid-template-columns: minmax(0, 1fr); } }
 .card { background: var(--surface); padding: 32px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
 .card h3 { font-family: var(--serif); font-weight: 600; font-size: 28px; line-height: 1.15; }
 .card dl { margin: 0; display: grid; grid-template-columns: 84px minmax(0, 1fr); gap: 8px 14px; font-size: 15px; }
@@ -170,6 +171,7 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
   .story-photos { margin-bottom: 16px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .story-photos figure:first-child { grid-row: auto; }
   .story-photos figure:first-child img { aspect-ratio: 4 / 3; flex: none; }
+  .story-photos img.crop-top-mobile { object-position: 50% 35% !important; }
 }
 @media (max-width: 560px) {
   .story-photos { grid-template-columns: minmax(0, 1fr); }
@@ -289,7 +291,7 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
       <div class="story">
         <p>At eighteen, I moved far from home to Xiamen, an island city in southern China, for college. I started studying French from zero, added economics as a second major. My favorite college memory is assistant directing The Marriage of Figaro with twenty classmates. We did everything ourselves, and almost 200 people came to watch.</p>
         <div class="story-photos">
-          <figure><img src="photos/xmu-volunteer.jpg" alt="Volunteering at an international workshop in Xiamen" loading="lazy" style="object-position: 50% 100%"><figcaption>Volunteering at the Confucius Institute</figcaption></figure>
+          <figure><img class="crop-top-mobile" src="photos/xmu-volunteer.jpg" alt="Volunteering at an international workshop in Xiamen" loading="lazy" style="object-position: 50% 100%"><figcaption>Volunteering at the Confucius Institute</figcaption></figure>
           <figure><img src="photos/xmu-cast.jpg" alt="Backstage with the cast and crew of The Marriage of Figaro" loading="lazy"><figcaption>Backstage with the cast of <em>The Marriage of Figaro</em></figcaption></figure>
           <figure><img src="photos/xmu-curtain-call.jpg" alt="Curtain call of the French play on stage" loading="lazy"><figcaption>Curtain call</figcaption></figure>
         </div>
