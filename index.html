@@ -129,25 +129,45 @@ h2:focus { outline: none; }
 .projects { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
 .projects > .card { border: 1px solid var(--line); }
 @media (max-width: 760px) { .projects { grid-template-columns: minmax(0, 1fr); } }
-@media (min-width: 1000px) { .projects { grid-template-columns: repeat(3, minmax(0, 1fr)); } .projects > .card:not(.feature) { padding: 26px; } .projects > .card:not(.feature) h3 { font-size: 24px; } }
-/* Feature project card (sample: EV) */
-.projects > .card.feature { grid-column: 1 / -1; border: 0; border-radius: 6px; padding: 44px 44px 44px 48px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 440px); gap: 40px; align-items: center; overflow: hidden; position: relative; }
-.projects > .card.f-ev { background: radial-gradient(120% 140% at 100% 0%, #1f6f68 0%, #134e4a 45%, #0d3b3a 100%); color: #eef6f4; }
+/* Feature project cards: one color theme per project */
+.projects { grid-template-columns: minmax(0, 1fr); }
+.projects > .card.feature { --bg1: #1f6f68; --bg2: #134e4a; --bg3: #0d3b3a; --acc: #8fd9c9; --dark: #134e4a; --bar1: #1f6f68; --bar2: #3fae94;
+  grid-column: 1 / -1; border: 0; border-radius: 6px; padding: 44px 44px 44px 48px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 440px); gap: 40px; align-items: center; overflow: hidden; position: relative;
+  background: radial-gradient(120% 140% at 100% 0%, var(--bg1) 0%, var(--bg2) 45%, var(--bg3) 100%); color: #f3f4f6; }
+.projects > .card.f-pm { --bg1: #34507e; --bg2: #1f3557; --bg3: #15253e; --acc: #a9c3ee; --dark: #1f3557; --bar1: #1f3557; --bar2: #5a7fc0; }
+.projects > .card.f-ship { --bg1: #8a3a5c; --bg2: #5e2440; --bg3: #42182d; --acc: #f3b6cc; --dark: #5e2440; --bar1: #5e2440; --bar2: #c0618a; }
+.projects > .card.f-factory { --bg1: #a8662a; --bg2: #7a4518; --bg3: #55300f; --acc: #f6cf9b; --dark: #7a4518; --bar1: #7a4518; --bar2: #d48a3c; }
 .feature .f-text { display: flex; flex-direction: column; gap: 16px; }
-.f-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: #8fd9c9; }
+.f-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--acc); }
 .projects > .card.feature h3 { font-family: var(--sans); font-weight: 700; font-size: clamp(28px, 3.2vw, 40px); line-height: 1.1; letter-spacing: -.02em; color: #ffffff; }
-.projects > .card.feature .kicker { color: rgba(238,246,244,.78); max-width: 34em; }
+.projects > .card.feature .kicker { color: rgba(243,244,246,.8); max-width: 34em; }
 .feature .links { margin-top: 6px; }
 .projects > .card.feature .links a { color: #ffffff; }
 .f-mock { background: #ffffff; color: var(--ink); border-radius: 8px; padding: 18px 20px 14px; box-shadow: 0 24px 50px -18px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.08); transform: rotate(-1.5deg) translateY(4px); }
 .mock-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: 12px; color: var(--muted); border-bottom: 1px solid var(--line); padding-bottom: 10px; margin-bottom: 12px; }
-.mock-head b { font-size: 12px; color: #134e4a; white-space: nowrap; }
+.mock-head b { font-size: 12px; color: var(--dark); white-space: nowrap; }
 .mock-bars { display: grid; gap: 8px; }
-.mock-bars > div { display: grid; grid-template-columns: 74px minmax(0, 1fr) 32px; align-items: center; gap: 10px; font-size: 12px; }
+.mock-bars > div { display: grid; grid-template-columns: 74px minmax(0, 1fr) 44px; align-items: center; gap: 10px; font-size: 12px; }
 .mock-bars span { color: var(--ink); }
-.mock-bars i { display: block; height: 12px; width: calc(var(--w) * 3); border-radius: 2px; background: linear-gradient(90deg, #1f6f68, #3fae94); }
+.mock-bars i { display: block; height: 12px; width: calc(var(--w) * 3); border-radius: 2px; background: linear-gradient(90deg, var(--bar1), var(--bar2)); }
+.mock-bars i.muted { background: #d9dce1; }
 .mock-bars em { font-style: normal; font-variant-numeric: tabular-nums; color: var(--muted); text-align: right; }
 .mock-foot { display: flex; justify-content: space-between; margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line); font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.mock-label { font-size: 11px; color: var(--muted); margin: 2px 0 6px; }
+.mock-steps { display: flex; gap: 4px; margin-bottom: 12px; }
+.mock-steps i { flex: 0 0 auto; width: calc((100% - 17 * 4px) / 18); height: 14px; border-radius: 2px; background: #d9dce1; }
+.mock-steps.on i { background: linear-gradient(180deg, var(--bar2), var(--bar1)); }
+.mock-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.mock-stats div { border: 1px solid var(--line); border-radius: 4px; padding: 8px 10px; }
+.mock-stats b { display: block; font-size: 17px; color: var(--dark); font-variant-numeric: tabular-nums; }
+.mock-stats span { font-size: 10.5px; color: var(--muted); line-height: 1.3; display: block; }
+.mock-dots { display: grid; grid-template-columns: repeat(26, minmax(0, 1fr)); gap: 3px; margin-bottom: 12px; }
+.mock-dots i { aspect-ratio: 1; border-radius: 50%; background: #d9dce1; }
+.mock-dots i.on { background: var(--bar2); box-shadow: 0 0 0 2px rgba(0,0,0,.04); }
+.mock-rank { display: flex; align-items: center; gap: 14px; margin-bottom: 12px; }
+.mock-rank b { font-size: 34px; line-height: 1; color: var(--dark); }
+.mock-rank span { font-size: 12px; color: var(--muted); line-height: 1.35; }
+.mock-rank strong { display: block; font-size: 18px; color: var(--ink); font-variant-numeric: tabular-nums; }
 @media (max-width: 760px) {
   .projects > .card.feature { grid-template-columns: minmax(0, 1fr); padding: 28px 22px; gap: 26px; }
   .f-mock { transform: none; }
@@ -412,6 +432,58 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
 
       <h2>Projects</h2>
       <div class="projects">
+        <article class="card feature f-pm">
+          <div class="f-text">
+            <div class="f-eyebrow">Lenovo · Digital Transformation</div>
+            <h3>Moving 200+ programs off Anaplan in under three months</h3>
+            <p class="kicker">Led the business side of moving Lenovo's DT project portfolio to Microsoft Project Online, and made the process simpler along the way.</p>
+            <div class="links"><a href="#anaplan-migration">Read the project ›</a></div>
+          </div>
+          <div class="f-mock" aria-hidden="true">
+            <div class="mock-head"><span>Steps to set up a program</span><b>33% fewer</b></div>
+            <div class="mock-label">Before · Anaplan · 18 steps</div>
+            <div class="mock-steps"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="mock-label">After · Microsoft Project Online · 12 steps</div>
+            <div class="mock-steps on"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="mock-stats"><div><b>~$300K</b><span>license cost saved a year</span></div><div><b>200+</b><span>programs migrated</span></div><div><b>9</b><span>business groups</span></div></div>
+          </div>
+        </article>
+        <article class="card feature f-ship">
+          <div class="f-text">
+            <div class="f-eyebrow">UW Business Analytics · Machine Learning</div>
+            <h3>Who should get free shipping?</h3>
+            <p class="kicker">Built a regression model that predicts each shopper's checkout spend, so free shipping goes only to shoppers likely to spend $150 or more.</p>
+            <div class="links"><a href="#checkout-spend">Read the project ›</a><a href="https://github.com/dephinefan25-coder/dephinefan25-coder.github.io/blob/main/projects/checkout-spend-prediction.ipynb" target="_blank" rel="noopener">Code ↗</a></div>
+          </div>
+          <div class="f-mock" aria-hidden="true">
+            <div class="mock-head"><span>Typical prediction error per shopper</span><b>Lasso model</b></div>
+            <div class="mock-bars">
+              <div><span>Baseline</span><i class="muted" style="--w:31%"></i><em>$42</em></div>
+              <div><span>Final Lasso</span><i style="--w:16.2%"></i><em>$22</em></div>
+            </div>
+            <div class="mock-label" style="margin-top:14px">Inputs kept: 7 of 103</div>
+            <div class="mock-dots"><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i></div>
+            <div class="mock-stats"><div><b>72%</b><span>offers to real $150+ shoppers</span></div><div><b>$104</b><span>wasted-offer cost, lowest tested</span></div><div><b>1,500</b><span>checkout sessions</span></div></div>
+          </div>
+        </article>
+        <article class="card feature f-factory">
+          <div class="f-text">
+            <div class="f-eyebrow">UW Business Analytics · Supply Chain &amp; Operations</div>
+            <h3>Running a factory for 268 days and finishing No.&nbsp;1</h3>
+            <p class="kicker">Ran a simulated electronics factory for 268 days, using queueing, inventory and newsvendor models to set machines, contracts and orders.</p>
+            <div class="links"><a href="#littlefield-operations">Read the project ›</a></div>
+          </div>
+          <div class="f-mock" aria-hidden="true">
+            <div class="mock-head"><span>Littlefield simulation · final results</span><b>Day 268</b></div>
+            <div class="mock-rank"><b>#1</b><span>Class ranking<strong>$2,436,166 cash</strong></span></div>
+            <div class="mock-label">Lead time per job (days)</div>
+            <div class="mock-bars">
+              <div><span>Day 50</span><i class="muted" style="--w:31%"></i><em>3.7</em></div>
+              <div><span>After fixes</span><i style="--w:3.6%"></i><em>0.43</em></div>
+            </div>
+            <div class="mock-foot"><span>0 jobs waiting for kits, days 55–267</span><span>Excel</span></div>
+          </div>
+        </article>
         <article class="card feature f-ev">
           <div class="f-text">
             <div class="f-eyebrow">UW Business Analytics · SQL &amp; Data Analysis</div>
@@ -431,24 +503,6 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
             </div>
             <div class="mock-foot"><span>Top counties · WA DOL registry</span><span>MySQL</span></div>
           </div>
-        </article>
-        <article class="card">
-          <div class="label">Lenovo · Digital Transformation</div>
-          <h3>Project Management System Migration</h3>
-          <p class="kicker">Led the business side of moving Lenovo's DT project portfolio to Microsoft Project Online, and made the process simpler along the way.</p>
-          <div class="links"><a href="#anaplan-migration">Read the project ›</a></div>
-        </article>
-        <article class="card">
-          <div class="label">UW Business Analytics · Machine Learning</div>
-          <h3>Predicting Checkout Spend to Target Free Shipping</h3>
-          <p class="kicker">Built a regression model that predicts each shopper's checkout spend, so free shipping goes only to shoppers likely to spend $150 or more.</p>
-          <div class="links"><a href="#checkout-spend">Read the project ›</a><a href="https://github.com/dephinefan25-coder/dephinefan25-coder.github.io/blob/main/projects/checkout-spend-prediction.ipynb" target="_blank" rel="noopener">Code ↗</a></div>
-        </article>
-        <article class="card">
-          <div class="label">UW Business Analytics · Supply Chain &amp; Operations</div>
-          <h3>Factory Capacity and Inventory Strategy</h3>
-          <p class="kicker">Ran a simulated electronics factory for 268 days, using queueing, inventory and newsvendor models to set machines, contracts and orders.</p>
-          <div class="links"><a href="#littlefield-operations">Read the project ›</a></div>
         </article>
       </div>
       <!-- Project card template, restore when projects are ready:
