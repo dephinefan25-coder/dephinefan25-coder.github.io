@@ -10,7 +10,7 @@
 <style>
 /* Layout: one-screen home = full-bleed Seattle photo with a soft ivory panel on the right (name, summary, key figures, actions) + a single row of six category tiles; each tile opens its own view. Deliberately light. */
 :root {
-  --bg: #f7f5f0;
+  --bg: #fafaf8;
   --surface: #ffffff;
   --ink: #17233a;
   --muted: #5f6673;
@@ -45,8 +45,8 @@ strong, b { font-weight: 600; }
   padding: 40px max(32px, calc((100vw - 1200px) / 2 + 32px)) 44px;
   background-color: #cdd9e4;
   background-image:
-    linear-gradient(270deg, rgba(247,245,240,.94) 0%, rgba(247,245,240,.86) max(34%, 560px), rgba(247,245,240,0) max(62%, 760px)),
-    linear-gradient(180deg, rgba(247,245,240,0) 70%, rgba(247,245,240,1) 100%),
+    linear-gradient(270deg, rgba(250,250,248,.94) 0%, rgba(250,250,248,.86) max(34%, 560px), rgba(250,250,248,0) max(62%, 760px)),
+    linear-gradient(180deg, rgba(250,250,248,0) 70%, rgba(250,250,248,1) 100%),
     url("Seattle.jpg");
   background-size: cover; background-position: 30% 42%;
 }
@@ -86,7 +86,7 @@ main { min-width: 0; }
 .to-top.on { opacity: 1; pointer-events: auto; }
 body.is-detail .to-top { display: none; }
 /* Floating navigation */
-.topnav { position: fixed; top: 0; left: 0; right: 0; z-index: 30; background: rgba(247,245,240,.94); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); transform: translateY(-100%); transition: transform .3s; }
+.topnav { position: fixed; top: 0; left: 0; right: 0; z-index: 30; background: rgba(250,250,248,.94); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); transform: translateY(-100%); transition: transform .3s; }
 .topnav.on { transform: none; }
 body.is-detail main { padding-top: 44px; }
 .topnav-in { max-width: 1200px; margin: 0 auto; padding: 0 32px; height: 52px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
@@ -251,7 +251,7 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
 @media (max-width: 1100px) {
   .home { min-height: 0; }
   .hero { min-height: 0; padding-top: 54vw; padding-bottom: 24px; align-items: flex-end; background-position: 30% top; background-size: 100% auto; background-repeat: no-repeat; background-color: var(--bg);
-    background-image: linear-gradient(180deg, rgba(247,245,240,0) 30vw, rgba(247,245,240,1) 56vw), url("Seattle.jpg"); }
+    background-image: linear-gradient(180deg, rgba(250,250,248,0) 30vw, rgba(250,250,248,1) 56vw), url("Seattle.jpg"); }
   .hero-text { width: 100%; }
 }
 @media (max-width: 560px) {
