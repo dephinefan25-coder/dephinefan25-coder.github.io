@@ -330,6 +330,15 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
 .cs-tag { display: block; font-style: normal; font-size: 11px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
 .entry ul + .cs-steps, .entry ul + .cs-compare { margin-top: 16px; }
 .cs-figure { margin: 16px 0 0; max-width: 42em; display: flex; flex-direction: column; gap: 8px; }
+.cs-pager { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: 24px; margin-top: 8px; padding-top: 24px; border-top: 1px solid var(--line); }
+.cs-pager a { color: var(--ink); text-decoration: none; }
+.cs-pager .pg-prev, .cs-pager .pg-next { display: flex; flex-direction: column; gap: 4px; padding: 14px 18px; border: 1px solid var(--line); border-radius: 4px; background: var(--surface); transition: border-color .2s; min-width: 0; }
+.cs-pager .pg-next { text-align: right; }
+.cs-pager .pg-prev:hover, .cs-pager .pg-next:hover { border-color: var(--gold); }
+.cs-pager span { font-size: 11px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); }
+.cs-pager b { font-family: var(--serif); font-weight: 600; font-size: 19px; line-height: 1.25; }
+.cs-pager .pg-all { font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: var(--navy); }
+@media (max-width: 640px) { .cs-pager { grid-template-columns: minmax(0, 1fr); gap: 12px; } .cs-pager .pg-all { order: 3; text-align: center; } .cs-pager .pg-next { text-align: left; } }
 /* Project pages: body text uses the full content width */
 .detail p, .detail .entry ul, .detail .cs-list, .detail .cs-steps, .detail .cs-compare, .detail .cs-tablewrap { max-width: none; }
 .cs-figure img { width: 100%; height: auto; display: block; background: #ffffff; border: 1px solid var(--line); }
@@ -707,7 +716,11 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
         </ul>
       </div>
 
-      <a class="back" href="#projects">← Back to projects</a>
+      <nav class="cs-pager" aria-label="More projects">
+        <a class="pg-prev" href="#ev-adoption"><span>← Previous project</span><b>EV Adoption Across Washington State</b></a>
+        <a class="pg-all" href="#projects">All projects</a>
+        <a class="pg-next" href="#pbi-cash-reporting"><span>Next project →</span><b>Automated Portfolio Cash Reporting in Power BI</b></a>
+      </nav>
     </section>
 
     <!-- ===== 编辑：案例 Checkout spend 预测（从 Projects 进入） ===== -->
@@ -818,7 +831,11 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
         </ul>
       </div>
 
-      <a class="back" href="#projects">← Back to projects</a>
+      <nav class="cs-pager" aria-label="More projects">
+        <a class="pg-prev" href="#anaplan-migration"><span>← Previous project</span><b>Project Management System Migration</b></a>
+        <a class="pg-all" href="#projects">All projects</a>
+        <a class="pg-next" href="#checkout-spend"><span>Next project →</span><b>Predicting Checkout Spend to Target Free Shipping</b></a>
+      </nav>
     </section>
 
     <section id="checkout-spend" class="view detail" hidden>
@@ -937,7 +954,11 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
 
       <p class="cs-note">From the BUS AN 517 (ML/AI Methods and Applications) case study in the UW Foster MSBA. OmniShop is fictional and the data is synthetic; the analysis and recommendation are my own.</p>
 
-      <a class="back" href="#projects">← Back to projects</a>
+      <nav class="cs-pager" aria-label="More projects">
+        <a class="pg-prev" href="#pbi-cash-reporting"><span>← Previous project</span><b>Automated Portfolio Cash Reporting in Power BI</b></a>
+        <a class="pg-all" href="#projects">All projects</a>
+        <a class="pg-next" href="#littlefield-operations"><span>Next project →</span><b>Factory Capacity and Inventory Strategy</b></a>
+      </nav>
     </section>
 
     <!-- ===== 编辑：项目 Littlefield 供应链与运营（从 Projects 进入） ===== -->
@@ -1047,7 +1068,11 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
         </figure>
       </div>
 
-      <a class="back" href="#projects">← Back to projects</a>
+      <nav class="cs-pager" aria-label="More projects">
+        <a class="pg-prev" href="#checkout-spend"><span>← Previous project</span><b>Predicting Checkout Spend to Target Free Shipping</b></a>
+        <a class="pg-all" href="#projects">All projects</a>
+        <a class="pg-next" href="#ev-adoption"><span>Next project →</span><b>EV Adoption Across Washington State</b></a>
+      </nav>
     </section>
 
     <!-- ===== 编辑：项目 EV adoption（从 Projects 进入） ===== -->
@@ -1151,7 +1176,11 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
         </figure>
       </div>
 
-      <a class="back" href="#projects">← Back to projects</a>
+      <nav class="cs-pager" aria-label="More projects">
+        <a class="pg-prev" href="#littlefield-operations"><span>← Previous project</span><b>Factory Capacity and Inventory Strategy</b></a>
+        <a class="pg-all" href="#projects">All projects</a>
+        <a class="pg-next" href="#anaplan-migration"><span>Next project →</span><b>Project Management System Migration</b></a>
+      </nav>
     </section>
 
     <!-- ===== 编辑：Work Experience & Skills 工作经历与技能 ===== -->
