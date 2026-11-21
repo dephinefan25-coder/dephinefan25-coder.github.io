@@ -129,6 +129,18 @@ h2:focus { outline: none; }
 .projects { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
 .projects > .card { border: 1px solid var(--line); }
 @media (max-width: 760px) { .projects { grid-template-columns: minmax(0, 1fr); } }
+/* Projects wheel: show 3 cards, loop through the rest */
+.proj-viewport { overflow: hidden; transition: height .5s cubic-bezier(.4,0,.2,1); }
+.proj-viewport > .projects { will-change: transform; }
+.proj-viewport > .projects.moving { transition: transform .5s cubic-bezier(.4,0,.2,1); }
+.proj-ctrl { display: flex; align-items: center; justify-content: center; gap: 18px; margin-top: 18px; }
+.proj-btn { width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--line); background: var(--surface); color: var(--navy); display: grid; place-items: center; cursor: pointer; transition: border-color .2s, color .2s, background .2s; }
+.proj-btn svg { width: 18px; height: 18px; }
+.proj-btn:hover { border-color: var(--gold); color: var(--gold); }
+.proj-dots { display: flex; gap: 8px; }
+.proj-dots i { width: 7px; height: 7px; border-radius: 50%; background: var(--line); transition: background .3s, transform .3s; }
+.proj-dots i.on { background: var(--gold); transform: scale(1.25); }
+@media (prefers-reduced-motion: reduce) { .proj-viewport, .proj-viewport > .projects.moving { transition: none; } }
 /* Feature project cards: one color theme per project */
 .projects { grid-template-columns: minmax(0, 1fr); }
 .projects > .card.feature { --bg1: #d7ece6; --bg2: #e7f2ee; --bg3: #f3f7f3; --acc: #2b7a6c; --dark: #134e4a; --bar1: #1f6f68; --bar2: #3fae94;
@@ -437,6 +449,8 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
       <a class="back" href="#">↑ Back to top</a>
 
       <h2>Projects</h2>
+      <div class="proj-wheel">
+        <div class="proj-viewport">
       <div class="projects">
         <article class="card feature f-pm">
           <div class="f-text">
@@ -524,6 +538,14 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
           </div>
         </article>
       </div>
+        </div>
+        <div class="proj-ctrl" aria-label="Browse projects">
+          <button class="proj-btn" type="button" data-dir="-1" aria-label="Previous project"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"/></svg></button>
+          <div class="proj-dots" aria-hidden="true"></div>
+          <button class="proj-btn" type="button" data-dir="1" aria-label="Next project"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+        </div>
+      </div>
+
       <!-- Project card template, restore when projects are ready:
       <div class="projects">
         <article class="card">
@@ -1340,6 +1362,57 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
   window.addEventListener('hashchange', show);
   show();
   updateNav();
+})();
+
+/* Projects wheel: shows 3 cards; arrows rotate the list in a loop */
+(function () {
+  var vp = document.querySelector('.proj-viewport');
+  if (!vp) return;
+  var list = vp.querySelector('.projects');
+  var dots = document.querySelector('.proj-dots');
+  var SHOW = 3, T = 520, busy = false;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function cards() { return Array.prototype.slice.call(list.children); }
+  cards().forEach(function (c, i) { c.dataset.idx = i; dots.appendChild(document.createElement('i')); });
+  var total = cards().length;
+  if (total <= SHOW) { document.querySelector('.proj-ctrl').hidden = true; return; }
+  function gap() { return parseFloat(getComputedStyle(list).rowGap) || 0; }
+  function heightOf(arr) { var h = 0, g = gap(); arr.forEach(function (c, i) { h += c.offsetHeight + (i ? g : 0); }); return h; }
+  function sync() {
+    var c = cards();
+    if (!busy) vp.style.height = heightOf(c.slice(0, SHOW)) + 'px';
+    c.forEach(function (el, i) { if (i < SHOW) el.removeAttribute('inert'); else el.setAttribute('inert', ''); });
+    var top = +c[0].dataset.idx;
+    Array.prototype.forEach.call(dots.children, function (d, i) { d.classList.toggle('on', i === top); });
+  }
+  function done(fn) { setTimeout(function () { list.classList.remove('moving'); fn && fn(); busy = false; sync(); }, reduce ? 0 : T); }
+  function next() {
+    var c = cards(), shift = c[0].offsetHeight + gap();
+    busy = true;
+    vp.style.height = heightOf(c.slice(1, SHOW + 1)) + 'px';
+    if (reduce) { list.appendChild(c[0]); return done(); }
+    list.classList.add('moving');
+    list.style.transform = 'translateY(-' + shift + 'px)';
+    done(function () { list.appendChild(c[0]); list.style.transform = ''; });
+  }
+  function prev() {
+    var c = cards(), last = c[c.length - 1];
+    busy = true;
+    list.insertBefore(last, c[0]);
+    vp.style.height = heightOf(cards().slice(0, SHOW)) + 'px';
+    if (reduce) return done();
+    list.style.transform = 'translateY(-' + (last.offsetHeight + gap()) + 'px)';
+    void list.offsetHeight;
+    list.classList.add('moving');
+    list.style.transform = '';
+    done();
+  }
+  document.querySelectorAll('.proj-btn').forEach(function (b) {
+    b.addEventListener('click', function () { if (busy) return; (b.dataset.dir === '1' ? next : prev)(); });
+  });
+  if ('ResizeObserver' in window) new ResizeObserver(function () { if (!busy) sync(); }).observe(list);
+  window.addEventListener('resize', sync);
+  sync();
 })();
 </script>
 </body>
