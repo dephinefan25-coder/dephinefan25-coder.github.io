@@ -129,19 +129,19 @@ h2:focus { outline: none; }
 .projects { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
 .projects > .card { border: 1px solid var(--line); }
 @media (max-width: 760px) { .projects { grid-template-columns: minmax(0, 1fr); } }
-/* Projects wheel: show 3 cards, loop through the rest */
+/* Projects pager: one page of cards at a time */
 .proj-viewport { overflow: hidden; transition: height .5s cubic-bezier(.4,0,.2,1); }
-.proj-viewport > .projects { will-change: transform; }
-.proj-viewport > .projects.moving { transition: transform .5s cubic-bezier(.4,0,.2,1); }
+.proj-viewport > .projects { transition: opacity .22s ease; }
 .proj-ctrl { display: flex; align-items: center; justify-content: center; gap: 18px; margin-top: 18px; }
 .proj-ctrl.top { margin: -6px 0 14px; }
 .proj-btn { width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--line); background: var(--surface); color: var(--navy); display: grid; place-items: center; cursor: pointer; transition: border-color .2s, color .2s, background .2s; }
 .proj-btn svg { width: 18px; height: 18px; }
-.proj-btn:hover { border-color: var(--gold); color: var(--gold); }
+.proj-btn:hover:not(:disabled) { border-color: var(--gold); color: var(--gold); }
+.proj-btn:disabled { opacity: .35; cursor: default; }
 .proj-dots { display: flex; gap: 8px; }
 .proj-dots i { width: 7px; height: 7px; border-radius: 50%; background: var(--line); transition: background .3s, transform .3s; }
 .proj-dots i.on { background: var(--gold); transform: scale(1.25); }
-@media (prefers-reduced-motion: reduce) { .proj-viewport, .proj-viewport > .projects.moving { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .proj-viewport, .proj-viewport > .projects { transition: none; } }
 /* Feature project cards: one color theme per project */
 .projects { grid-template-columns: minmax(0, 1fr); gap: 16px; }
 .projects > .card.feature { --bg1: #d7ece6; --bg2: #e7f2ee; --bg3: #f3f7f3; --acc: #2b7a6c; --dark: #134e4a; --bar1: #1f6f68; --bar2: #3fae94;
@@ -473,9 +473,9 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
       <h2>Projects</h2>
       <div class="proj-wheel">
         <div class="proj-ctrl top" aria-label="Browse projects">
-          <button class="proj-btn" type="button" data-dir="-1" aria-label="Previous project"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"/></svg></button>
+          <button class="proj-btn" type="button" data-dir="-1" aria-label="Previous page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"/></svg></button>
           <div class="proj-dots" aria-hidden="true"></div>
-          <button class="proj-btn" type="button" data-dir="1" aria-label="Next project"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+          <button class="proj-btn" type="button" data-dir="1" aria-label="Next page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
         </div>
         <div class="proj-viewport">
       <div class="projects">
@@ -567,9 +567,9 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
       </div>
         </div>
         <div class="proj-ctrl" aria-label="Browse projects">
-          <button class="proj-btn" type="button" data-dir="-1" aria-label="Previous project"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"/></svg></button>
+          <button class="proj-btn" type="button" data-dir="-1" aria-label="Previous page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"/></svg></button>
           <div class="proj-dots" aria-hidden="true"></div>
-          <button class="proj-btn" type="button" data-dir="1" aria-label="Next project"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
+          <button class="proj-btn" type="button" data-dir="1" aria-label="Next page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></button>
         </div>
       </div>
 
@@ -1411,78 +1411,67 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
   updateNav();
 })();
 
-/* Projects wheel: shows 2 rows (4 cards) on wide screens, 3 cards when stacked; arrows rotate one row at a time in a loop */
+/* Projects pager: 4 cards per page on wide screens (2 x 2), 3 when stacked; arrows flip pages, no looping */
 (function () {
   var vp = document.querySelector('.proj-viewport');
   if (!vp) return;
   var list = vp.querySelector('.projects');
   var dotSets = document.querySelectorAll('.proj-dots');
-  var T = 520, busy = false;
-  function cols() { return getComputedStyle(list).gridTemplateColumns.split(' ').length; }
-  function show() { return cols() > 1 ? cols() * 2 : 3; }
+  var btns = document.querySelectorAll('.proj-btn');
+  var cards = Array.prototype.slice.call(list.children);
+  var page = 0, busy = false, T = 220;
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  function cards() { return Array.prototype.slice.call(list.children); }
-  cards().forEach(function (c, i) { c.dataset.idx = i; dotSets.forEach(function (d) { d.appendChild(document.createElement('i')); }); });
-  var total = cards().length;
-  if (total <= 3) { document.querySelectorAll('.proj-ctrl').forEach(function (c) { c.hidden = true; }); return; }
-  function gap() { return parseFloat(getComputedStyle(list).rowGap) || 0; }
-  function heightOf(arr) { var h = 0, g = gap(); var k = cols(); arr.forEach(function (c, i) { if (i % k) return; h += c.getBoundingClientRect().height + (i ? g : 0); }); return Math.ceil(h) + 1; }
-  function sync() {
-    var c = cards();
-    var n = show(), k = cols();
-    if (!busy) vp.style.height = heightOf(c.slice(0, n)) + 'px';
-    c.forEach(function (el, i) { if (i < n) el.removeAttribute('inert'); else el.setAttribute('inert', ''); });
-    var top = c.slice(0, k).map(function (el) { return +el.dataset.idx; });
-    dotSets.forEach(function (ds) { Array.prototype.forEach.call(ds.children, function (d, i) { d.classList.toggle('on', top.indexOf(i) > -1); }); });
+  function cols() { return getComputedStyle(list).gridTemplateColumns.split(' ').length; }
+  function size() { return cols() > 1 ? cols() * 2 : 3; }
+  function pages() { return Math.ceil(cards.length / size()); }
+  function render() {
+    var n = size(), p = pages();
+    if (page > p - 1) page = p - 1;
+    cards.forEach(function (el, i) { el.hidden = Math.floor(i / n) !== page; });
+    document.querySelectorAll('.proj-ctrl').forEach(function (c) { c.hidden = p < 2; });
+    dotSets.forEach(function (ds) {
+      while (ds.children.length < p) ds.appendChild(document.createElement('i'));
+      while (ds.children.length > p) ds.removeChild(ds.lastChild);
+      Array.prototype.forEach.call(ds.children, function (d, i) { d.classList.toggle('on', i === page); });
+    });
+    btns.forEach(function (b) {
+      var off = b.dataset.dir === '1' ? page >= p - 1 : page <= 0;
+      b.disabled = off;
+    });
+    /* keep the area as tall as a full page so a shorter last page doesn't make the section jump */
+    var vis = cards.filter(function (el) { return !el.hidden; })[0];
+    if (vis) {
+      var rows = Math.ceil(n / cols()), g = parseFloat(getComputedStyle(list).rowGap) || 0;
+      vp.style.height = Math.ceil(rows * vis.getBoundingClientRect().height + (rows - 1) * g) + 1 + 'px';
+    }
   }
-  function done(fn) { setTimeout(function () { list.classList.remove('moving'); fn && fn(); busy = false; sync(); }, reduce ? 0 : T); }
-  function next() {
-    var c = cards(), k = cols(), shift = c[0].offsetHeight + gap(), head = c.slice(0, k);
+  function go(d) {
+    var np = page + d;
+    if (busy || np < 0 || np > pages() - 1) return;
     busy = true;
-    vp.style.height = heightOf(c.concat(head).slice(k, k + show())) + 'px';
-    function rot() { head.forEach(function (el) { list.appendChild(el); }); }
-    if (reduce) { rot(); return done(); }
-    list.classList.add('moving');
-    list.style.transform = 'translateY(-' + shift + 'px)';
-    done(function () { rot(); list.style.transform = ''; });
+    if (reduce) { page = np; render(); busy = false; return; }
+    list.style.opacity = '0';
+    setTimeout(function () { page = np; render(); list.style.opacity = ''; busy = false; }, T);
   }
-  function prev() {
-    var c = cards(), k = cols(), tail = c.slice(-k);
-    busy = true;
-    tail.forEach(function (el) { list.insertBefore(el, c[0]); });
-    vp.style.height = heightOf(cards().slice(0, show())) + 'px';
-    if (reduce) return done();
-    list.style.transform = 'translateY(-' + (tail[0].offsetHeight + gap()) + 'px)';
-    void list.offsetHeight;
-    list.classList.add('moving');
-    list.style.transform = '';
-    done();
-  }
-  document.querySelectorAll('.proj-btn').forEach(function (b) {
-    b.addEventListener('click', function () { if (busy) return; (b.dataset.dir === '1' ? next : prev)(); });
-  });
+  btns.forEach(function (b) { b.addEventListener('click', function () { go(b.dataset.dir === '1' ? 1 : -1); }); });
   /* Give every card the height of the tallest one */
   var lastW = -1;
   function equalize() {
     var w = vp.clientWidth;
     if (!w || w === lastW) return;
     lastW = w;
-    var c = cards();
-    c.forEach(function (el) { el.style.minHeight = ''; });
+    cards.forEach(function (el) { el.hidden = false; el.style.minHeight = ''; });
     var max = 0;
-    c.forEach(function (el) { max = Math.max(max, el.getBoundingClientRect().height); });
-    c.forEach(function (el) { el.style.minHeight = Math.ceil(max) + 'px'; });
-    sync();
+    cards.forEach(function (el) { max = Math.max(max, el.getBoundingClientRect().height); });
+    cards.forEach(function (el) { el.style.minHeight = Math.ceil(max) + 'px'; });
+    render();
   }
-  if ('ResizeObserver' in window) {
-    new ResizeObserver(function () { if (!busy) sync(); }).observe(list);
-    new ResizeObserver(equalize).observe(vp);
-  }
-  window.addEventListener('resize', function () { equalize(); sync(); });
+  if ('ResizeObserver' in window) new ResizeObserver(equalize).observe(vp);
+  window.addEventListener('resize', function () { equalize(); render(); });
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { lastW = -1; equalize(); });
   window.addEventListener('load', function () { lastW = -1; equalize(); });
   equalize();
-  sync();
+  render();
 })();
 </script>
 </body>
