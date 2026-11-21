@@ -136,6 +136,8 @@ h2:focus { outline: none; }
   background: radial-gradient(120% 140% at 100% 0%, var(--bg1) 0%, var(--bg2) 45%, var(--bg3) 100%); color: var(--ink); border: 1px solid rgba(23,35,58,.06); }
 .projects > .card.f-pm { --bg1: #d9e2f0; --bg2: #e8eef6; --bg3: #f4f6f9; --acc: #3b5a8c; --dark: #1f3557; --bar1: #1f3557; --bar2: #5a7fc0; }
 .projects > .card.f-ship { --bg1: #f0dde4; --bg2: #f6e9ed; --bg3: #faf4f4; --acc: #9a4769; --dark: #5e2440; --bar1: #5e2440; --bar2: #c0618a; }
+.projects > .card.f-pbi { --bg1: #e4dcf1; --bg2: #eee8f6; --bg3: #f6f3f9; --acc: #6b4c9a; --dark: #4b3270; --bar1: #4b3270; --bar2: #8a6cc0; }
+.mock-shot { display: block; width: 100%; height: auto; border-radius: 4px; border: 1px solid var(--line); }
 .projects > .card.f-factory { --bg1: #f2e2cc; --bg2: #f7ecdd; --bg3: #faf5ec; --acc: #9a6224; --dark: #7a4518; --bar1: #7a4518; --bar2: #d48a3c; }
 .feature .f-text { display: flex; flex-direction: column; gap: 16px; }
 .f-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--acc); }
@@ -448,6 +450,19 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
             <div class="mock-stats"><div><b>~$300K</b><span>license cost saved a year</span></div><div><b>200+</b><span>programs migrated</span></div><div><b>9</b><span>business groups</span></div></div>
           </div>
         </article>
+        <article class="card feature f-pbi">
+          <div class="f-text">
+            <div class="f-eyebrow">Lenovo · Digital Transformation Office</div>
+            <h3>Six hand-built monthly decks, replaced by one self-serve Power BI app</h3>
+            <p class="kicker">Built one Power BI model and report template that now feeds six platform reports, so leaders see current portfolio spending any time instead of waiting for a monthly deck.</p>
+            <div class="links"><a href="#pbi-cash-reporting">Read the project ›</a></div>
+          </div>
+          <div class="f-mock">
+            <div class="mock-head"><span>Portfolio cash overview · Power BI</span><b>~10 hrs/week saved</b></div>
+            <img class="mock-shot" src="photos/pbi-cash-card.jpg" alt="Power BI program-level cash overview page with KPI tiles, spending mix and a program table" loading="lazy">
+            <div class="mock-foot"><span>Sample data for demo purposes only</span><span>6 platforms</span></div>
+          </div>
+        </article>
         <article class="card feature f-ship">
           <div class="f-text">
             <div class="f-eyebrow">UW Business Analytics · Machine Learning</div>
@@ -658,6 +673,109 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
     </section>
 
     <!-- ===== 编辑：案例 Checkout spend 预测（从 Projects 进入） ===== -->
+    <section id="pbi-cash-reporting" class="view detail" hidden>
+      <a class="back" href="#projects">← Back to projects</a>
+
+      <h2>Automated Portfolio Cash Reporting in Power BI <span class="label">Case study</span></h2>
+      <p class="cs-lede">Every month our team reported program spending to the leaders of six business platforms, one hand-built PowerPoint deck per platform. I replaced the six decks with self-serve Power BI reports that leaders can open any time, each showing only that platform's data.</p>
+
+      <div class="cs-meta">
+        <div><span class="label">Team</span>Lenovo Digital Transformation Office</div>
+        <div><span class="label">Audience</span>Leaders of 6 business platforms</div>
+        <div><span class="label">Scope</span>200+ projects in the portfolio</div>
+        <div><span class="label">Tools</span>Power BI, DAX, Power BI Apps</div>
+      </div>
+
+      <div class="cs-kpis" aria-label="Results">
+        <div><b>~10 hrs</b><span>of repetitive reporting work saved each week</span></div>
+        <div><b>6 → 1</b><span>hand-built decks replaced by one Power BI app</span></div>
+        <div><b>1</b><span>data model and set of logic behind all six reports</span></div>
+        <div><b>200+</b><span>projects covered, with data current whenever leaders open it</span></div>
+      </div>
+
+      <div class="cs-block">
+        <h3>The problem</h3>
+        <p>Every month, our team reported program spending to the leaders of six business platforms. The portfolio covered 200+ projects, and each platform got its own PowerPoint deck, built by hand. We pulled data from Excel files on SharePoint, ran the calculations, flagged issues and pasted the results into slides. All six decks used the same data and the same logic, so most of the work was repetition. The numbers were also out of date by the time leaders saw them.</p>
+      </div>
+
+      <div class="cs-block">
+        <h3>Objective</h3>
+        <p>Replace the six manual decks with self-serve reports that leaders can open at any time, and make sure each platform sees only its own data.</p>
+      </div>
+
+      <div class="cs-block">
+        <h3>What I did</h3>
+        <div class="timeline">
+          <article class="entry">
+            <div class="when">Build the model</div>
+            <div>
+              <h3>Connected the source and built one data model</h3>
+              <ul>
+                <li>Connected Power BI directly to the SharePoint Excel source</li>
+                <li>Built one data model with DAX measures for approved budget, registered amount, actual spending and execution rate</li>
+              </ul>
+            </div>
+          </article>
+          <article class="entry">
+            <div class="when">Flag issues</div>
+            <div>
+              <h3>Added automatic flags for problems</h3>
+              <ul>
+                <li>Over- or under-execution against budget</li>
+                <li>Projects still open after their exit date</li>
+                <li>Charges posted after a project was closed</li>
+              </ul>
+            </div>
+          </article>
+          <article class="entry">
+            <div class="when">Design the report</div>
+            <div>
+              <h3>Designed a 4-page report</h3>
+              <ul>
+                <li>A program-level cash overview</li>
+                <li>A project drill-down with filters by program, status and PM</li>
+                <li>A page tracking projects that haven't closed</li>
+                <li>A page monitoring charges posted after closure</li>
+              </ul>
+            </div>
+          </article>
+          <article class="entry">
+            <div class="when">Scale and share</div>
+            <div>
+              <h3>One template, six reports, one app</h3>
+              <ul>
+                <li>Built one report as a template, then duplicated it for each platform with a platform-level filter, creating six reports in one workspace from the same model and logic</li>
+                <li>Published the six reports as a single Power BI app with a separate audience for each platform, so each leader sees only their own platform's report</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="cs-block">
+        <h3>The report</h3>
+        <figure class="cs-figure" style="max-width: none">
+          <img src="photos/pbi-cash-program.png" alt="Program-level cash overview page: YTD approved, YTD actual and monthly spending tiles, spending category mix, and a program table with execution rates" loading="lazy">
+          <figcaption class="cs-note">Page 1.1, program-level cash overview. Sample data for demo purposes only.</figcaption>
+        </figure>
+        <figure class="cs-figure" style="max-width: none">
+          <img src="photos/pbi-cash-project.png" alt="Project drill-down page with program, project, status and PM filters and a program-to-project table" loading="lazy">
+          <figcaption class="cs-note">Page 1.2, project drill-down with filters by program, project, status and PM. Sample data for demo purposes only.</figcaption>
+        </figure>
+      </div>
+
+      <div class="cs-block">
+        <h3>Outcome</h3>
+        <ul class="cs-list">
+          <li>Saved about <b>10 hours per week</b> of repetitive reporting work</li>
+          <li>Leaders across <b>6 platforms</b> now open one link and get current, interactive data instead of waiting for a monthly deck</li>
+          <li><b>One model and one set of logic</b> now drive all six reports, so numbers are consistent across platforms</li>
+        </ul>
+      </div>
+
+      <a class="back" href="#projects">← Back to projects</a>
+    </section>
+
     <section id="checkout-spend" class="view detail" hidden>
       <a class="back" href="#projects">← Back to projects</a>
 
