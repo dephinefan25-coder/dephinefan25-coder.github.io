@@ -95,6 +95,8 @@ h2:focus { outline: none; }
 .entry { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 32px; padding-block: 30px; border-bottom: 1px solid var(--line); }
 .when { font-size: 11px; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); padding-top: 9px; font-variant-numeric: tabular-nums; }
 .entry h3 { font-family: var(--serif); font-weight: 600; font-size: 28px; line-height: 1.15; }
+.entry h3 a { color: inherit; text-decoration: none; }
+.entry h3 a:hover { text-decoration: underline; text-underline-offset: 4px; }
 .entry .org { color: var(--muted); margin: 4px 0 14px; font-size: 15px; }
 .entry ul { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 8px; max-width: 42em; }
 .entry li::marker { color: var(--gold); }
@@ -102,6 +104,7 @@ h2:focus { outline: none; }
 
 .projects { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
 .projects > .card { border: 1px solid var(--line); }
+@media (max-width: 760px) { .projects { grid-template-columns: minmax(0, 1fr); } }
 .card { background: var(--surface); padding: 32px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
 .card h3 { font-family: var(--serif); font-weight: 600; font-size: 28px; line-height: 1.15; }
 .card dl { margin: 0; display: grid; grid-template-columns: 84px minmax(0, 1fr); gap: 8px 14px; font-size: 15px; }
@@ -170,6 +173,7 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
   .story-photos { margin-bottom: 16px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .story-photos figure:first-child { grid-row: auto; }
   .story-photos figure:first-child img { aspect-ratio: 4 / 3; flex: none; }
+  .story-photos img.crop-top-mobile { object-position: 50% 35% !important; }
 }
 @media (max-width: 560px) {
   .story-photos { grid-template-columns: minmax(0, 1fr); }
@@ -289,7 +293,7 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
       <div class="story">
         <p>At eighteen, I moved far from home to Xiamen, an island city in southern China, for college. I started studying French from zero, added economics as a second major. My favorite college memory is assistant directing The Marriage of Figaro with twenty classmates. We did everything ourselves, and almost 200 people came to watch.</p>
         <div class="story-photos">
-          <figure><img src="photos/xmu-volunteer.jpg" alt="Volunteering at an international workshop in Xiamen" loading="lazy" style="object-position: 50% 100%"><figcaption>Volunteering at the Confucius Institute</figcaption></figure>
+          <figure><img class="crop-top-mobile" src="photos/xmu-volunteer.jpg" alt="Volunteering at an international workshop in Xiamen" loading="lazy" style="object-position: 50% 100%"><figcaption>Volunteering at the Confucius Institute</figcaption></figure>
           <figure><img src="photos/xmu-cast.jpg" alt="Backstage with the cast and crew of The Marriage of Figaro" loading="lazy"><figcaption>Backstage with the cast of <em>The Marriage of Figaro</em></figcaption></figure>
           <figure><img src="photos/xmu-curtain-call.jpg" alt="Curtain call of the French play on stage" loading="lazy"><figcaption>Curtain call</figcaption></figure>
         </div>
@@ -819,7 +823,7 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
         <article class="entry">
           <div class="when">2026 – Jun 2027</div>
           <div>
-            <h3>MS, Business Analytics</h3>
+            <h3><a href="https://foster.uw.edu/academics/degree-programs/master-science-business-analytics/" target="_blank" rel="noopener">MS, Business Analytics</a></h3>
             <div class="org">University of Washington, Foster School of Business · Seattle</div>
             <p class="muted">Competitive Strategy; Probability and Statistics; Data Management and Visualization</p>
           </div>
@@ -827,7 +831,7 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
         <article class="entry">
           <div class="when">2020 – 2023</div>
           <div>
-            <h3>Master in Management, Finance specialization</h3>
+            <h3><a href="https://escp.eu/" target="_blank" rel="noopener">Master in Management, Finance specialization</a></h3>
             <div class="org">ESCP Business School · Paris</div>
             <p class="muted">Corporate Finance; Financial Analyst; International Marketing Decisions</p>
           </div>
@@ -835,7 +839,7 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
         <article class="entry">
           <div class="when">2016 – 2020</div>
           <div>
-            <h3>BA, French Language &amp; Literature; Minor in Economics</h3>
+            <h3><a href="https://en.xmu.edu.cn/" target="_blank" rel="noopener">BA, French Language &amp; Literature; Minor in Economics</a></h3>
             <div class="org">Xiamen University · Xiamen</div>
           </div>
         </article>
@@ -898,11 +902,17 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
   var footer = document.querySelector('footer');
   var views = Array.prototype.slice.call(document.querySelectorAll('.view'));
   var first = true;
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
   function show() {
     var id = (location.hash || '').slice(1);
     var target = id ? document.getElementById(id) : null;
     if (target && views.indexOf(target) < 0) target = null;
     var detail = !!(target && target.classList.contains('detail'));
+    if (first && target && !detail) {
+      // Opening the site (or a saved link like #experience) always starts at the top of the home page
+      history.replaceState(null, '', location.pathname + location.search);
+      target = null;
+    }
     document.body.classList.toggle('is-detail', detail);
     views.forEach(function (v) { v.hidden = detail ? v !== target : v.classList.contains('detail'); });
     home.hidden = detail;
