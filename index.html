@@ -330,6 +330,8 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
 .cs-tag { display: block; font-style: normal; font-size: 11px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
 .entry ul + .cs-steps, .entry ul + .cs-compare { margin-top: 16px; }
 .cs-figure { margin: 16px 0 0; max-width: 42em; display: flex; flex-direction: column; gap: 8px; }
+/* Project pages: body text uses the full content width */
+.detail p, .detail .entry ul, .detail .cs-list, .detail .cs-steps, .detail .cs-compare, .detail .cs-tablewrap { max-width: none; }
 .cs-figure img { width: 100%; height: auto; display: block; background: #ffffff; border: 1px solid var(--line); }
 .cs-tablewrap { overflow-x: auto; max-width: 42em; margin-top: 16px; }
 .cs-table { width: 100%; border-collapse: collapse; font-size: 15px; font-variant-numeric: tabular-nums; background: var(--surface); border: 1px solid var(--line); }
