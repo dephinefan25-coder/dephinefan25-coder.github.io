@@ -122,12 +122,17 @@ h2:focus { outline: none; }
 .jobs { display: flex; flex-direction: column; gap: 28px; }
 .job { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 24px; align-items: start; }
 .job-logo { width: 96px; height: 64px; display: grid; place-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; overflow: hidden; padding: 10px; box-sizing: border-box; }
-.job-logo img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.job-logo img { width: 100%; height: 100%; min-height: 0; object-fit: contain; display: block; }
+.job-logo { grid-template: minmax(0, 1fr) / minmax(0, 1fr); }
 .job-logo.fill { background: #e1140a; border-color: #e1140a; padding: 4px; }
 .job-logo.tight { padding: 6px; }
 .job-logo.dark { background: var(--navy); border-color: var(--navy); }
 .job h4 { margin: 0; font-family: var(--serif); font-weight: 600; font-size: 24px; line-height: 1.2; color: var(--ink); }
 .job-co { font-weight: 500; }
+.job h4 a { color: inherit; text-decoration: none; }
+.job h4 a:hover { text-decoration: underline; text-underline-offset: 4px; }
+a.job-logo { transition: border-color .25s; }
+a.job-logo:hover { border-color: var(--gold); }
 .job-when { margin-top: 6px; font-size: 15px; color: var(--muted); font-variant-numeric: tabular-nums; }
 .job-meta { margin-top: 2px; font-size: 15px; color: var(--muted); }
 .skills .pill { font-size: 14px; padding: 6px 14px; border: 1px solid var(--line); border-radius: 2px; background: var(--bg); }
@@ -863,28 +868,31 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
       <a class="back" href="#">↑ Back to top</a>
 
       <h2>Education</h2>
-      <div class="timeline">
-        <article class="entry">
-          <div class="when">2026 – Jun 2027<img class="school-logo" src="logos/uw.png" alt="University of Washington logo" loading="lazy"></div>
+      <div class="jobs">
+        <article class="job">
+          <a class="job-logo" href="https://foster.uw.edu/academics/degree-programs/master-science-business-analytics/" target="_blank" rel="noopener"><img src="logos/uw.png" alt="University of Washington logo" loading="lazy"></a>
           <div>
-            <h3><a href="https://foster.uw.edu/academics/degree-programs/master-science-business-analytics/" target="_blank" rel="noopener">MS, Business Analytics</a></h3>
-            <div class="org">University of Washington, Foster School of Business · Seattle</div>
-            <p class="muted">Competitive Strategy; Probability and Statistics; Data Management and Visualization</p>
+            <h4><a href="https://foster.uw.edu/academics/degree-programs/master-science-business-analytics/" target="_blank" rel="noopener">MS, Business Analytics</a><br><span class="job-co">@ University of Washington, Foster School of Business</span></h4>
+            <div class="job-when">2026 – Jun 2027</div>
+            <div class="job-meta">Seattle</div>
+            <div class="job-meta">Competitive Strategy; Probability and Statistics; Data Management and Visualization</div>
           </div>
         </article>
-        <article class="entry">
-          <div class="when">2020 – 2023<img class="school-logo" src="logos/escp.png" alt="ESCP Business School logo" loading="lazy"></div>
+        <article class="job">
+          <a class="job-logo" href="https://escp.eu/" target="_blank" rel="noopener"><img src="logos/escp.png" alt="ESCP Business School logo" loading="lazy"></a>
           <div>
-            <h3><a href="https://escp.eu/" target="_blank" rel="noopener">Master in Management, Finance specialization</a></h3>
-            <div class="org">ESCP Business School · Paris</div>
-            <p class="muted">Corporate Finance; Financial Analyst; International Marketing Decisions</p>
+            <h4><a href="https://escp.eu/" target="_blank" rel="noopener">Master in Management, Finance specialization</a><br><span class="job-co">@ ESCP Business School</span></h4>
+            <div class="job-when">2020 – 2023</div>
+            <div class="job-meta">Paris</div>
+            <div class="job-meta">Corporate Finance; Financial Analyst; International Marketing Decisions</div>
           </div>
         </article>
-        <article class="entry">
-          <div class="when">2016 – 2020<img class="school-logo" src="logos/xmu.png" alt="Xiamen University logo" loading="lazy"></div>
+        <article class="job">
+          <a class="job-logo" href="https://en.xmu.edu.cn/" target="_blank" rel="noopener"><img src="logos/xmu.png" alt="Xiamen University logo" loading="lazy"></a>
           <div>
-            <h3><a href="https://en.xmu.edu.cn/" target="_blank" rel="noopener">BA, French Language &amp; Literature; Minor in Economics</a></h3>
-            <div class="org">Xiamen University · Xiamen</div>
+            <h4><a href="https://en.xmu.edu.cn/" target="_blank" rel="noopener">BA, French Language &amp; Literature; Minor in Economics</a><br><span class="job-co">@ Xiamen University</span></h4>
+            <div class="job-when">2016 – 2020</div>
+            <div class="job-meta">Xiamen</div>
           </div>
         </article>
       </div>
@@ -928,7 +936,7 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
       <h2>Contact</h2>
       <p>I'm looking for data analyst, business analyst, financial analyst, and strategy &amp; operations roles.</p>
       <div class="contact">
-        <div><span>Email</span>  dephine.fan25@gmail.com</div>
+        <div><span>Email</span>  <a href="mailto:dephine.fan25@gmail.com">dephine.fan25@gmail.com</a></div>
         <div><span>LinkedIn</span>  <a href="https://www.linkedin.com/in/fanhaoran/" target="_blank" rel="noopener">linkedin.com/in/fanhaoran</a></div>
         <div><span>GitHub</span>  <a href="https://github.com/dephinefan25-coder" target="_blank" rel="noopener">dephinefan25-coder</a></div>
         <div><span>Based in</span>  Seattle, WA</div>
