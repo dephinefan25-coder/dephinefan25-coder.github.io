@@ -67,14 +67,14 @@ strong, b { font-weight: 600; }
 .btn.ghost { background: transparent; color: var(--navy); box-shadow: inset 0 0 0 1px var(--navy); }
 .btn.ghost:hover { background: var(--navy); color: #ffffff; }
 
-.tiles { flex: none; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); margin-block: 8px 28px; }
-.tile { position: relative; display: flex; flex-direction: column; gap: 4px; padding: 20px 18px 18px; background: var(--surface); color: var(--ink); transition: background .3s; }
+.tiles { flex: none; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); margin-block: 8px 0; }
+.tile { position: relative; display: flex; flex-direction: column; gap: 4px; padding: 14px 18px 14px; background: var(--surface); color: var(--ink); transition: background .3s; }
 .tile:hover { text-decoration: none; background: #fbf8f2; }
-.icon { color: var(--gold); margin-bottom: 8px; }
+.icon { color: var(--gold); margin-bottom: 4px; }
 .icon svg { width: 24px; height: 24px; display: block; }
 .tile-t { font-family: var(--serif); font-size: 24px; font-weight: 600; line-height: 1.1; color: var(--ink); }
 .tile-d { font-size: 12.5px; color: var(--muted); line-height: 1.45; }
-.arrow { margin-top: auto; padding-top: 10px; font-size: 11px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); transition: letter-spacing .3s; }
+.arrow { margin-top: auto; padding-top: 6px; font-size: 11px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); transition: letter-spacing .3s; }
 .arrow::before { content: "View "; }
 .tile:hover .arrow { letter-spacing: .3em; }
 
@@ -83,16 +83,16 @@ main { min-width: 0; }
 .to-top { position: fixed; right: 24px; bottom: 24px; z-index: 20; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line); background: var(--surface); color: var(--navy); display: flex; align-items: center; justify-content: center; font-size: 18px; box-shadow: 0 4px 14px rgba(23, 35, 58, .12); opacity: 0; pointer-events: none; transition: opacity .25s; }
 .to-top.on { opacity: 1; pointer-events: auto; }
 body.is-detail .to-top { display: none; }
-body:not(.is-detail) .view:not(.detail) { padding-top: 88px; }
-.view { display: flex; flex-direction: column; gap: 32px; padding-top: 64px; padding-bottom: 8px; animation: rise .6s cubic-bezier(.2,.8,.2,1); }
+body:not(.is-detail) .view:not(.detail) { padding-top: 56px; }
+.view { display: flex; flex-direction: column; gap: 24px; padding-top: 48px; padding-bottom: 8px; animation: rise .6s cubic-bezier(.2,.8,.2,1); }
 @keyframes rise { from { opacity: .3; transform: translateY(10px); } to { opacity: 1; transform: none; } }
 .back { align-self: flex-start; font-size: 11px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); }
-section > h2 { font-family: var(--serif); font-weight: 500; font-size: clamp(38px, 5.5vw, 58px); line-height: 1; color: var(--ink); display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap; padding-bottom: 22px; border-bottom: 1px solid var(--line); }
+section > h2 { font-family: var(--serif); font-weight: 500; font-size: clamp(38px, 5.5vw, 58px); line-height: 1; color: var(--ink); display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap; padding-bottom: 16px; border-bottom: 1px solid var(--line); }
 section > h2 .label { font-size: 11px; }
 h2:focus { outline: none; }
 
 .timeline { display: flex; flex-direction: column; }
-.entry { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 32px; padding-block: 30px; border-bottom: 1px solid var(--line); }
+.entry { display: grid; grid-template-columns: 180px minmax(0, 1fr); gap: 32px; padding-block: 24px; border-bottom: 1px solid var(--line); }
 .when { font-size: 11px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); padding-top: 9px; font-variant-numeric: tabular-nums; }
 .entry h3 { font-family: var(--serif); font-weight: 600; font-size: 28px; line-height: 1.15; }
 .entry h3 a { color: inherit; text-decoration: none; }
