@@ -1447,8 +1447,27 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
   document.querySelectorAll('.proj-btn').forEach(function (b) {
     b.addEventListener('click', function () { if (busy) return; (b.dataset.dir === '1' ? next : prev)(); });
   });
-  if ('ResizeObserver' in window) new ResizeObserver(function () { if (!busy) sync(); }).observe(list);
-  window.addEventListener('resize', sync);
+  /* Give every card the height of the tallest one */
+  var lastW = -1;
+  function equalize() {
+    var w = vp.clientWidth;
+    if (!w || w === lastW) return;
+    lastW = w;
+    var c = cards();
+    c.forEach(function (el) { el.style.minHeight = ''; });
+    var max = 0;
+    c.forEach(function (el) { max = Math.max(max, el.getBoundingClientRect().height); });
+    c.forEach(function (el) { el.style.minHeight = Math.ceil(max) + 'px'; });
+    sync();
+  }
+  if ('ResizeObserver' in window) {
+    new ResizeObserver(function () { if (!busy) sync(); }).observe(list);
+    new ResizeObserver(equalize).observe(vp);
+  }
+  window.addEventListener('resize', function () { equalize(); sync(); });
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { lastW = -1; equalize(); });
+  window.addEventListener('load', function () { lastW = -1; equalize(); });
+  equalize();
   sync();
 })();
 </script>
