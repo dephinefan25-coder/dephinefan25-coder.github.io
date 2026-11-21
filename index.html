@@ -190,6 +190,15 @@ h2:focus { outline: none; }
   .projects > .card.feature h3 { font-size: 21px; }
   .f-mock { transform: none; }
 }
+/* Two cards per row on wide screens */
+@media (min-width: 1180px) {
+  .projects { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .projects > .card.feature { grid-template-columns: minmax(0, 1fr) minmax(0, 200px); padding: 14px 18px 14px 24px; gap: 18px; }
+  .projects > .card.feature h3 { font-size: 21px; }
+  .projects > .card.feature .kicker { font-size: 13px; }
+  .projects > .card.feature .f-mock { zoom: .5; }
+  .projects > .card.feature .f-eyebrow { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; letter-spacing: .16em; }
+}
 .card { background: var(--surface); padding: 32px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
 .card h3 { font-family: var(--serif); font-weight: 600; font-size: 28px; line-height: 1.15; }
 .card dl { margin: 0; display: grid; grid-template-columns: 84px minmax(0, 1fr); gap: 8px 14px; font-size: 15px; }
@@ -472,7 +481,7 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
       <div class="projects">
         <article class="card feature f-pm">
           <div class="f-text">
-            <div class="f-eyebrow"><span class="f-num">01</span>Lenovo · Digital Transformation</div>
+            <div class="f-eyebrow"><span class="f-num">01</span>Lenovo · Transformation</div>
             <h3>Moving 200+ programs off Anaplan</h3>
             <p class="kicker">Led the business side of moving Lenovo's DT project portfolio to Microsoft Project Online, and made the process simpler along the way.</p>
             <div class="links"><a href="#anaplan-migration">Read the project ›</a></div>
@@ -488,7 +497,7 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
         </article>
         <article class="card feature f-pbi">
           <div class="f-text">
-            <div class="f-eyebrow"><span class="f-num">02</span>Lenovo · Digital Transformation Office</div>
+            <div class="f-eyebrow"><span class="f-num">02</span>Lenovo · Power BI</div>
             <h3>Six hand-built monthly decks, replaced by one self-serve Power BI app</h3>
             <p class="kicker">Built one Power BI model and report template that now feeds six platform reports, so leaders see current portfolio spending any time instead of waiting for a monthly deck.</p>
             <div class="links"><a href="#pbi-cash-reporting">Read the project ›</a></div>
@@ -501,7 +510,7 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
         </article>
         <article class="card feature f-ship">
           <div class="f-text">
-            <div class="f-eyebrow"><span class="f-num">03</span>UW Business Analytics · Machine Learning</div>
+            <div class="f-eyebrow"><span class="f-num">03</span>UW · Machine Learning</div>
             <h3>Who should get free shipping?</h3>
             <p class="kicker">Built a regression model that predicts each shopper's checkout spend, so free shipping goes only to shoppers likely to spend $150 or more.</p>
             <div class="links"><a href="#checkout-spend">Read the project ›</a><a href="https://github.com/dephinefan25-coder/dephinefan25-coder.github.io/blob/main/projects/checkout-spend-prediction.ipynb" target="_blank" rel="noopener">Code ↗</a></div>
@@ -519,7 +528,7 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
         </article>
         <article class="card feature f-factory">
           <div class="f-text">
-            <div class="f-eyebrow"><span class="f-num">04</span>UW Business Analytics · Supply Chain &amp; Operations</div>
+            <div class="f-eyebrow"><span class="f-num">04</span>UW · Supply Chain &amp; Ops</div>
             <h3>Running a factory for 268 days and finishing No.&nbsp;1</h3>
             <p class="kicker">Ran a simulated electronics factory for 268 days, using queueing, inventory and newsvendor models to set machines, contracts and orders.</p>
             <div class="links"><a href="#littlefield-operations">Read the project ›</a></div>
@@ -537,7 +546,7 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
         </article>
         <article class="card feature f-ev">
           <div class="f-text">
-            <div class="f-eyebrow"><span class="f-num">05</span>UW Business Analytics · SQL &amp; Data Analysis</div>
+            <div class="f-eyebrow"><span class="f-num">05</span>UW · SQL &amp; Data Analysis</div>
             <h3>Which Washington counties are going electric?</h3>
             <p class="kicker">Cleaned and joined four public datasets in MySQL to see which counties are going electric, what they buy, and whether income matters.</p>
             <div class="links"><a href="#ev-adoption">Read the project ›</a><a href="https://github.com/dephinefan25-coder/dephinefan25-coder.github.io/tree/main/projects/ev-adoption" target="_blank" rel="noopener">Data &amp; code ↗</a></div>
@@ -1402,44 +1411,48 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
   updateNav();
 })();
 
-/* Projects wheel: shows 3 cards; arrows rotate the list in a loop */
+/* Projects wheel: shows 2 rows (4 cards) on wide screens, 3 cards when stacked; arrows rotate one row at a time in a loop */
 (function () {
   var vp = document.querySelector('.proj-viewport');
   if (!vp) return;
   var list = vp.querySelector('.projects');
   var dotSets = document.querySelectorAll('.proj-dots');
-  var SHOW = 3, T = 520, busy = false;
+  var T = 520, busy = false;
+  function cols() { return getComputedStyle(list).gridTemplateColumns.split(' ').length; }
+  function show() { return cols() > 1 ? cols() * 2 : 3; }
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   function cards() { return Array.prototype.slice.call(list.children); }
   cards().forEach(function (c, i) { c.dataset.idx = i; dotSets.forEach(function (d) { d.appendChild(document.createElement('i')); }); });
   var total = cards().length;
-  if (total <= SHOW) { document.querySelectorAll('.proj-ctrl').forEach(function (c) { c.hidden = true; }); return; }
+  if (total <= 3) { document.querySelectorAll('.proj-ctrl').forEach(function (c) { c.hidden = true; }); return; }
   function gap() { return parseFloat(getComputedStyle(list).rowGap) || 0; }
-  function heightOf(arr) { var h = 0, g = gap(); arr.forEach(function (c, i) { h += c.getBoundingClientRect().height + (i ? g : 0); }); return Math.ceil(h) + 1; }
+  function heightOf(arr) { var h = 0, g = gap(); var k = cols(); arr.forEach(function (c, i) { if (i % k) return; h += c.getBoundingClientRect().height + (i ? g : 0); }); return Math.ceil(h) + 1; }
   function sync() {
     var c = cards();
-    if (!busy) vp.style.height = heightOf(c.slice(0, SHOW)) + 'px';
-    c.forEach(function (el, i) { if (i < SHOW) el.removeAttribute('inert'); else el.setAttribute('inert', ''); });
-    var top = +c[0].dataset.idx;
-    dotSets.forEach(function (ds) { Array.prototype.forEach.call(ds.children, function (d, i) { d.classList.toggle('on', i === top); }); });
+    var n = show(), k = cols();
+    if (!busy) vp.style.height = heightOf(c.slice(0, n)) + 'px';
+    c.forEach(function (el, i) { if (i < n) el.removeAttribute('inert'); else el.setAttribute('inert', ''); });
+    var top = c.slice(0, k).map(function (el) { return +el.dataset.idx; });
+    dotSets.forEach(function (ds) { Array.prototype.forEach.call(ds.children, function (d, i) { d.classList.toggle('on', top.indexOf(i) > -1); }); });
   }
   function done(fn) { setTimeout(function () { list.classList.remove('moving'); fn && fn(); busy = false; sync(); }, reduce ? 0 : T); }
   function next() {
-    var c = cards(), shift = c[0].offsetHeight + gap();
+    var c = cards(), k = cols(), shift = c[0].offsetHeight + gap(), head = c.slice(0, k);
     busy = true;
-    vp.style.height = heightOf(c.slice(1, SHOW + 1)) + 'px';
-    if (reduce) { list.appendChild(c[0]); return done(); }
+    vp.style.height = heightOf(c.concat(head).slice(k, k + show())) + 'px';
+    function rot() { head.forEach(function (el) { list.appendChild(el); }); }
+    if (reduce) { rot(); return done(); }
     list.classList.add('moving');
     list.style.transform = 'translateY(-' + shift + 'px)';
-    done(function () { list.appendChild(c[0]); list.style.transform = ''; });
+    done(function () { rot(); list.style.transform = ''; });
   }
   function prev() {
-    var c = cards(), last = c[c.length - 1];
+    var c = cards(), k = cols(), tail = c.slice(-k);
     busy = true;
-    list.insertBefore(last, c[0]);
-    vp.style.height = heightOf(cards().slice(0, SHOW)) + 'px';
+    tail.forEach(function (el) { list.insertBefore(el, c[0]); });
+    vp.style.height = heightOf(cards().slice(0, show())) + 'px';
     if (reduce) return done();
-    list.style.transform = 'translateY(-' + (last.offsetHeight + gap()) + 'px)';
+    list.style.transform = 'translateY(-' + (tail[0].offsetHeight + gap()) + 'px)';
     void list.offsetHeight;
     list.classList.add('moving');
     list.style.transform = '';
