@@ -308,11 +308,15 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
 .cs-lede { font-size: 17px; line-height: 1.7; color: var(--muted); max-width: 40em; }
 .cs-intro { --acc: #2b7a6c; --dark: #134e4a; --bar1: #1f6f68; --bar2: #3fae94; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 400px); gap: 40px; align-items: center; }
 @media (max-width: 860px) { .cs-intro { grid-template-columns: minmax(0, 1fr); gap: 24px; } }
+.cs-intro-text { display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+.cs-intro .cs-meta { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 24px; border: 0; padding: 0; }
+.cs-intro .cs-meta div { font-size: 13px; gap: 2px; color: var(--ink); }
 .cs-meta { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding-block: 20px; }
 .cs-meta div { display: flex; flex-direction: column; gap: 4px; min-width: 0; font-size: 15px; }
-.cs-kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
-.cs-kpis div { background: var(--surface); padding: 24px 22px; display: flex; flex-direction: column; gap: 6px; }
-.cs-kpis b { font-family: var(--serif); font-weight: 600; font-size: 34px; line-height: 1; color: var(--navy); font-variant-numeric: lining-nums tabular-nums; }
+.cs-kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; margin: 4px 0 6px; }
+.cs-kpis div { padding: 2px 20px; border-left: 1px solid var(--line); display: flex; flex-direction: column; gap: 4px; }
+.cs-kpis div:first-child { padding-left: 0; border-left: 0; }
+.cs-kpis b { font-family: var(--serif); font-weight: 600; font-size: 28px; line-height: 1; color: var(--navy); font-variant-numeric: lining-nums tabular-nums; }
 .cs-kpis span { font-size: 13px; color: var(--muted); line-height: 1.45; }
 .cs-block { display: flex; flex-direction: column; gap: 14px; }
 .cs-block > h3 { font-family: var(--serif); font-weight: 600; font-size: 34px; line-height: 1.1; }
@@ -342,7 +346,7 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
 .cs-node.changed { border-color: var(--gold); background: #fbf6ec; }
 .cs-tag { display: block; font-style: normal; font-size: 11px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
 .entry ul + .cs-steps, .entry ul + .cs-compare { margin-top: 16px; }
-.cs-figure { margin: 16px 0 0; max-width: 42em; display: flex; flex-direction: column; gap: 8px; }
+.cs-figure { margin: 16px 0 0; max-width: 460px; display: flex; flex-direction: column; gap: 8px; }
 .cs-pager { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: 24px; margin-top: 8px; padding-top: 24px; border-top: 1px solid var(--line); }
 .cs-pager a { color: var(--ink); text-decoration: none; }
 .cs-pager .pg-prev, .cs-pager .pg-next { display: flex; flex-direction: column; gap: 4px; padding: 14px 18px; border: 1px solid var(--line); border-radius: 4px; background: var(--surface); transition: border-color .2s; min-width: 0; }
@@ -369,6 +373,8 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
 .cs-list li::marker { color: var(--gold); }
 @media (max-width: 860px) {
   .cs-meta, .cs-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cs-kpis { row-gap: 14px; }
+  .cs-kpis div:nth-child(odd) { padding-left: 0; border-left: 0; }
 }
 @media (max-width: 560px) {
   .cs-compare { grid-template-columns: minmax(0, 1fr); }
@@ -377,7 +383,7 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
   .cs-flow.mixed > .cs-node { align-self: stretch; }
   .cs-node, .cs-stack { flex: none; }
   .cs-to { transform: rotate(90deg); }
-  .cs-kpis b { font-size: 28px; }
+  .cs-kpis b { font-size: 24px; }
   .cs-arch { padding: 20px; }
 }
 </style>
@@ -609,7 +615,15 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
 
       <h2>Project Management System Migration <span class="label">Case study</span></h2>
       <div class="cs-intro f-pm">
-        <p class="cs-lede">Our Digital Transformation project portfolio was managed in <a href="https://www.anaplan.com/" target="_blank" rel="noopener">Anaplan</a>, which was hitting its limits and costing a lot in licenses. As the business-side owner of the tool, I led the business side of the move to Microsoft Dynamics 365 Project Operations (MSPO), from requirements to reporting, and made the process simpler along the way.</p>
+        <div class="cs-intro-text">
+          <p class="cs-lede">Our Digital Transformation project portfolio was managed in <a href="https://www.anaplan.com/" target="_blank" rel="noopener">Anaplan</a>, which was hitting its limits and costing a lot in licenses. As the business-side owner of the tool, I led the business side of the move to Microsoft Dynamics 365 Project Operations (MSPO), from requirements to reporting, and made the process simpler along the way.</p>
+          <div class="cs-meta">
+            <div><span class="label">My role</span>Business-side system owner and key user</div>
+            <div><span class="label">Team</span>DT business, IT and Finance</div>
+            <div><span class="label">Timeline</span>Under three months</div>
+            <div><span class="label">Tools</span><span><a href="https://www.anaplan.com/" target="_blank" rel="noopener">Anaplan</a>, Microsoft Dynamics 365 Project Operations (MSPO), Power BI</span></div>
+          </div>
+        </div>
       <div class="f-mock" aria-hidden="true">
         <div class="mock-head"><span>Steps to set up a program</span><b>33% fewer</b></div>
         <div class="mock-label">Before · Anaplan · 18 steps</div>
@@ -618,20 +632,6 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
         <div class="mock-steps on"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
         <div class="mock-stats"><div><b>~$300K</b><span>license cost saved a year</span></div><div><b>200+</b><span>programs migrated</span></div><div><b>9</b><span>business groups</span></div></div>
       </div>
-      </div>
-
-      <div class="cs-meta">
-        <div><span class="label">My role</span>Business-side system owner and key user</div>
-        <div><span class="label">Team</span>DT business, IT and Finance</div>
-        <div><span class="label">Timeline</span>Under three months</div>
-        <div><span class="label">Tools</span><span><a href="https://www.anaplan.com/" target="_blank" rel="noopener">Anaplan</a>, Microsoft Dynamics 365 Project Operations (MSPO), Power BI</span></div>
-      </div>
-
-      <div class="cs-kpis" aria-label="Results">
-        <div><b>~$300K</b><span>yearly license cost saved once Anaplan was retired</span></div>
-        <div><b>18 → 12</b><span>steps to set up a program, about 33% fewer</span></div>
-        <div><b>200+</b><span>programs moved across 9 business groups</span></div>
-        <div><b>2 → 1</b><span>tools for program and project management</span></div>
       </div>
 
       <div class="cs-block">
@@ -727,6 +727,12 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
 
       <div class="cs-block">
         <h3>Outcome</h3>
+        <div class="cs-kpis" aria-label="Results">
+          <div><b>~$300K</b><span>yearly license cost saved once Anaplan was retired</span></div>
+          <div><b>18 → 12</b><span>steps to set up a program, about 33% fewer</span></div>
+          <div><b>200+</b><span>programs moved across 9 business groups</span></div>
+          <div><b>2 → 1</b><span>tools for program and project management</span></div>
+        </div>
         <ul class="cs-list">
           <li>Saved <b>~$300K</b> a year in license cost once Anaplan was retired</li>
           <li>Cut the steps to set up a program by about <b>33%</b></li>
@@ -747,26 +753,20 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
 
       <h2>Automated Portfolio Cash Reporting in Power BI <span class="label">Case study</span></h2>
       <div class="cs-intro f-pbi">
-        <p class="cs-lede">Every month our team reported program spending to the leaders of six business platforms, one hand-built PowerPoint deck per platform. I replaced the six decks with self-serve Power BI reports that leaders can open any time, each showing only that platform's data.</p>
+        <div class="cs-intro-text">
+          <p class="cs-lede">Every month our team reported program spending to the leaders of six business platforms, one hand-built PowerPoint deck per platform. I replaced the six decks with self-serve Power BI reports that leaders can open any time, each showing only that platform's data.</p>
+          <div class="cs-meta">
+            <div><span class="label">Team</span>Lenovo Digital Transformation Office</div>
+            <div><span class="label">Audience</span>Leaders of 6 business platforms</div>
+            <div><span class="label">Scope</span>200+ projects in the portfolio</div>
+            <div><span class="label">Tools</span>Power BI, DAX, Power BI Apps</div>
+          </div>
+        </div>
       <div class="f-mock" aria-hidden="true">
         <div class="mock-head"><span>Portfolio cash overview · Power BI</span><b>~10 hrs/week saved</b></div>
         <img class="mock-shot" src="photos/pbi-cash-card.jpg" alt="Power BI program-level cash overview page with KPI tiles, spending mix and a program table" loading="lazy">
         <div class="mock-foot"><span>Sample data for demo purposes only</span><span>6 platforms</span></div>
       </div>
-      </div>
-
-      <div class="cs-meta">
-        <div><span class="label">Team</span>Lenovo Digital Transformation Office</div>
-        <div><span class="label">Audience</span>Leaders of 6 business platforms</div>
-        <div><span class="label">Scope</span>200+ projects in the portfolio</div>
-        <div><span class="label">Tools</span>Power BI, DAX, Power BI Apps</div>
-      </div>
-
-      <div class="cs-kpis" aria-label="Results">
-        <div><b>~10 hrs</b><span>of repetitive reporting work saved each week</span></div>
-        <div><b>6 → 1</b><span>hand-built decks replaced by one Power BI app</span></div>
-        <div><b>1</b><span>data model and set of logic behind all six reports</span></div>
-        <div><b>200+</b><span>projects covered, with data current whenever leaders open it</span></div>
       </div>
 
       <div class="cs-block">
@@ -830,11 +830,11 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
 
       <div class="cs-block">
         <h3>The report</h3>
-        <figure class="cs-figure" style="max-width: none">
+        <figure class="cs-figure" style="max-width: 640px">
           <img src="photos/pbi-cash-program.png" alt="Program-level cash overview page: YTD approved, YTD actual and monthly spending tiles, spending category mix, and a program table with execution rates" loading="lazy">
           <figcaption class="cs-note">Page 1.1, program-level cash overview. Sample data for demo purposes only.</figcaption>
         </figure>
-        <figure class="cs-figure" style="max-width: none">
+        <figure class="cs-figure" style="max-width: 640px">
           <img src="photos/pbi-cash-project.png" alt="Project drill-down page with program, project, status and PM filters and a program-to-project table" loading="lazy">
           <figcaption class="cs-note">Page 1.2, project drill-down with filters by program, project, status and PM. Sample data for demo purposes only.</figcaption>
         </figure>
@@ -842,6 +842,12 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
 
       <div class="cs-block">
         <h3>Outcome</h3>
+        <div class="cs-kpis" aria-label="Results">
+          <div><b>~10 hrs</b><span>of repetitive reporting work saved each week</span></div>
+          <div><b>6 → 1</b><span>hand-built decks replaced by one Power BI app</span></div>
+          <div><b>1</b><span>data model and set of logic behind all six reports</span></div>
+          <div><b>200+</b><span>projects covered, with data current whenever leaders open it</span></div>
+        </div>
         <ul class="cs-list">
           <li>Saved about <b>10 hours per week</b> of repetitive reporting work</li>
           <li>Leaders across <b>6 platforms</b> now open one link and get current, interactive data instead of waiting for a monthly deck</li>
@@ -861,7 +867,15 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
 
       <h2>Predicting Checkout Spend to Target Free Shipping <span class="label">Case study · UW Business Analytics</span></h2>
       <div class="cs-intro f-ship">
-        <p class="cs-lede">A regression model that predicts each shopper's checkout spend, so free shipping goes only to those likely to spend $150 or more. The final Lasso model cut typical prediction error from $42 to $22 using just 7 of 103 inputs.</p>
+        <div class="cs-intro-text">
+          <p class="cs-lede">A regression model that predicts each shopper's checkout spend, so free shipping goes only to those likely to spend $150 or more. The final Lasso model cut typical prediction error from $42 to $22 using just 7 of 103 inputs.</p>
+          <div class="cs-meta">
+            <div><span class="label">Decision</span>Who gets free shipping, which costs $8 per order</div>
+            <div><span class="label">Data</span>1,500 checkout sessions, 15 candidate features</div>
+            <div><span class="label">Methods</span>OLS, cross-validation, Ridge, Lasso</div>
+            <div><span class="label">Tools</span>Python, pandas, scikit-learn</div>
+          </div>
+        </div>
       <div class="f-mock" aria-hidden="true">
         <div class="mock-head"><span>Typical prediction error per shopper</span><b>Lasso model</b></div>
         <div class="mock-bars">
@@ -872,20 +886,6 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
         <div class="mock-dots"><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i></div>
         <div class="mock-stats"><div><b>72%</b><span>offers to real $150+ shoppers</span></div><div><b>$104</b><span>wasted-offer cost, lowest tested</span></div><div><b>1,500</b><span>checkout sessions</span></div></div>
       </div>
-      </div>
-
-      <div class="cs-meta">
-        <div><span class="label">Decision</span>Who gets free shipping, which costs $8 per order</div>
-        <div><span class="label">Data</span>1,500 checkout sessions, 15 candidate features</div>
-        <div><span class="label">Methods</span>OLS, cross-validation, Ridge, Lasso</div>
-        <div><span class="label">Tools</span>Python, pandas, scikit-learn</div>
-      </div>
-
-      <div class="cs-kpis" aria-label="Results">
-        <div><b>$42 → $22</b><span>typical prediction error per shopper</span></div>
-        <div><b>7 of 103</b><span>inputs kept by the final model</span></div>
-        <div><b>72%</b><span>of offers went to shoppers who really spent $150+</span></div>
-        <div><b>$104</b><span>wasted-offer cost, lowest of all models tested</span></div>
       </div>
 
       <div class="cs-links"><a href="https://github.com/dephinefan25-coder/dephinefan25-coder.github.io/blob/main/projects/checkout-spend-prediction.ipynb" target="_blank" rel="noopener">View the code on GitHub ↗</a></div>
@@ -967,6 +967,12 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
 
       <div class="cs-block">
         <h3>Recommendation</h3>
+        <div class="cs-kpis" aria-label="Results">
+          <div><b>$42 → $22</b><span>typical prediction error per shopper</span></div>
+          <div><b>7 of 103</b><span>inputs kept by the final model</span></div>
+          <div><b>72%</b><span>of offers went to shoppers who really spent $150+</span></div>
+          <div><b>$104</b><span>wasted-offer cost, lowest of all models tested</span></div>
+        </div>
         <p>I recommended Lasso. It is nearly as accurate as the best model, uses only 7 inputs a revenue leader can understand, and wasted the least money. The trade-off is that it missed 20 of 54 high spenders, so I proposed logging every shopper after launch, tracking near-misses just under $150, and running a small holdout group to measure whether free shipping actually raises spend.</p>
       </div>
 
@@ -985,7 +991,15 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
 
       <h2>Factory Capacity and Inventory Strategy <span class="label">Case study · UW Business Analytics</span></h2>
       <div class="cs-intro f-factory">
-        <p class="cs-lede">Littlefield is an online simulation of an electronics factory with three workstations. Our team took over on day 50 and made every decision on machines, delivery contracts and kit inventory until the game ended on day 268. Using queueing, inventory and newsvendor models, we finished No. 1 in the class with $2,436,166 in cash.</p>
+        <div class="cs-intro-text">
+          <p class="cs-lede">Littlefield is an online simulation of an electronics factory with three workstations. Our team took over on day 50 and made every decision on machines, delivery contracts and kit inventory until the game ended on day 268. Using queueing, inventory and newsvendor models, we finished No. 1 in the class with $2,436,166 in cash.</p>
+          <div class="cs-meta">
+            <div><span class="label">Team</span>Group 4, MSBA classmates</div>
+            <div><span class="label">Decisions</span>Machines, contract, reorder point, order size</div>
+            <div><span class="label">Methods</span>M/M/c queueing, Little's law, EOQ, newsvendor</div>
+            <div><span class="label">Tools</span>Excel</div>
+          </div>
+        </div>
       <div class="f-mock" aria-hidden="true">
         <div class="mock-head"><span>Littlefield simulation · final results</span><b>Day 268</b></div>
         <div class="mock-rank"><b>#1</b><span>Class ranking<strong>$2,436,166 cash</strong></span></div>
@@ -996,20 +1010,6 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
         </div>
         <div class="mock-foot"><span>0 jobs waiting for kits, days 55–267</span><span>Excel</span></div>
       </div>
-      </div>
-
-      <div class="cs-meta">
-        <div><span class="label">Team</span>Group 4, MSBA classmates</div>
-        <div><span class="label">Decisions</span>Machines, contract, reorder point, order size</div>
-        <div><span class="label">Methods</span>M/M/c queueing, Little's law, EOQ, newsvendor</div>
-        <div><span class="label">Tools</span>Excel</div>
-      </div>
-
-      <div class="cs-kpis" aria-label="Results">
-        <div><b>No. 1</b><span>final ranking in the class</span></div>
-        <div><b>$2.44M</b><span>final cash balance on day 268</span></div>
-        <div><b>3.7 → 0.43</b><span>days of lead time per job</span></div>
-        <div><b>0</b><span>jobs waiting for kits from day 55 to day 267</span></div>
       </div>
 
       <div class="cs-block">
@@ -1079,8 +1079,14 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
 
       <div class="cs-block">
         <h3>Outcome</h3>
+        <div class="cs-kpis" aria-label="Results">
+          <div><b>No. 1</b><span>final ranking in the class</span></div>
+          <div><b>$2.44M</b><span>final cash balance on day 268</span></div>
+          <div><b>3.7 → 0.43</b><span>days of lead time per job</span></div>
+          <div><b>0</b><span>jobs waiting for kits from day 55 to day 267</span></div>
+        </div>
         <p>We finished with $2,436,166, first in the class. The kits lasted until day 267, when new jobs could no longer finish anyway. Three choices drove the result: reaching Contract 3 early, which earned about $1.1M more than the same jobs on the base contract; never letting a job wait for kits; and stopping purchases before the lock.</p>
-        <figure class="cs-figure" style="max-width: 520px">
+        <figure class="cs-figure" style="max-width: 380px">
           <img src="photos/littlefield-scoreboard.png" alt="Final class scoreboard of 10 teams: group4 ranked first with $2,436,166, ahead of BusinessBrains at $2,410,799 and HiveFive at $2,391,292" loading="lazy">
           <figcaption class="cs-note">Final scoreboard on day 268.</figcaption>
         </figure>
@@ -1099,7 +1105,15 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
 
       <h2>EV Adoption Across Washington State <span class="label">Case study · UW Business Analytics</span></h2>
       <div class="cs-intro f-ev">
-        <p class="cs-lede">A team analysis of about 290,000 registered electric vehicles in Washington, asking which counties are adopting fastest, what kinds of EVs they buy, and whether income plays a role. I handled the data cleaning across four tables in MySQL and built the county-level analysis of electric share and range.</p>
+        <div class="cs-intro-text">
+          <p class="cs-lede">A team analysis of about 290,000 registered electric vehicles in Washington, asking which counties are adopting fastest, what kinds of EVs they buy, and whether income plays a role. I handled the data cleaning across four tables in MySQL and built the county-level analysis of electric share and range.</p>
+          <div class="cs-meta">
+            <div><span class="label">Team</span>Five MSBA classmates</div>
+            <div><span class="label">Data</span>WA DOL registry, county income, EV model specs</div>
+            <div><span class="label">Methods</span>Cleaning, joins, window functions, aggregation</div>
+            <div><span class="label">Tools</span>MySQL</div>
+          </div>
+        </div>
       <div class="f-mock" aria-hidden="true">
         <div class="mock-head"><span>EV share of 2025 new registrations</span><b>~290K records</b></div>
         <div class="mock-bars">
@@ -1112,20 +1126,6 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
         </div>
         <div class="mock-foot"><span>Top counties · WA DOL registry</span><span>MySQL</span></div>
       </div>
-      </div>
-
-      <div class="cs-meta">
-        <div><span class="label">Team</span>Five MSBA classmates</div>
-        <div><span class="label">Data</span>WA DOL registry, county income, EV model specs</div>
-        <div><span class="label">Methods</span>Cleaning, joins, window functions, aggregation</div>
-        <div><span class="label">Tools</span>MySQL</div>
-      </div>
-
-      <div class="cs-kpis" aria-label="Results">
-        <div><b>~290K</b><span>EV records cleaned and analyzed</span></div>
-        <div><b>4</b><span>public datasets joined by county</span></div>
-        <div><b>30%+</b><span>of 2025 registrations electric in Pierce, Clark and Snohomish</span></div>
-        <div><b>41.8%</b><span>of EVs fall in the 300–350 mile range band</span></div>
       </div>
 
       <div class="cs-links"><a href="https://github.com/dephinefan25-coder/dephinefan25-coder.github.io/tree/main/projects/ev-adoption" target="_blank" rel="noopener">View data, SQL and slides on GitHub ↗</a></div>
@@ -1181,6 +1181,12 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
 
       <div class="cs-block">
         <h3>What the team found</h3>
+        <div class="cs-kpis" aria-label="Results">
+          <div><b>~290K</b><span>EV records cleaned and analyzed</span></div>
+          <div><b>4</b><span>public datasets joined by county</span></div>
+          <div><b>30%+</b><span>of 2025 registrations electric in Pierce, Clark and Snohomish</span></div>
+          <div><b>41.8%</b><span>of EVs fall in the 300–350 mile range band</span></div>
+        </div>
         <ul class="cs-list">
           <li><b>Volume is not adoption.</b> King County has the most EVs but ranks 4th by adoption rate; Pierce, Clark and Snohomish each passed 30% of 2025 registrations.</li>
           <li><b>Growth is moving to smaller counties.</b> Grays Harbor, Douglas and Pacific grew fastest from 2022 to 2023.</li>
