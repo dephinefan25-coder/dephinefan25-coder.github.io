@@ -130,23 +130,22 @@ h2:focus { outline: none; }
 .projects > .card { border: 1px solid var(--line); }
 @media (max-width: 760px) { .projects { grid-template-columns: minmax(0, 1fr); } }
 /* Feature project cards: one color theme per project */
-@media (min-width: 761px) { .projects { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-.projects > .card.feature:last-child:nth-child(odd) { grid-column: 1 / -1; justify-self: center; width: calc(50% - 12px); }
+.projects { grid-template-columns: minmax(0, 1fr); }
 .projects > .card.feature { --bg1: #d7ece6; --bg2: #e7f2ee; --bg3: #f3f7f3; --acc: #2b7a6c; --dark: #134e4a; --bar1: #1f6f68; --bar2: #3fae94;
-  border: 0; border-radius: 6px; padding: 34px 34px 32px; display: flex; flex-direction: column; gap: 26px; overflow: hidden; position: relative;
+  border: 0; border-radius: 6px; padding: 40px 44px 40px 48px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 420px); gap: 40px; align-items: center; overflow: hidden; position: relative;
   background: radial-gradient(120% 140% at 100% 0%, var(--bg1) 0%, var(--bg2) 45%, var(--bg3) 100%); color: var(--ink); border: 1px solid rgba(23,35,58,.06); }
-.projects > .card.f-pm { --bg1: #d9e2f0; --bg2: #e8eef6; --bg3: #f4f6f9; --acc: #3b5a8c; --dark: #1f3557; --bar1: #1f3557; --bar2: #5a7fc0; }
-.projects > .card.f-ship { --bg1: #f0dde4; --bg2: #f6e9ed; --bg3: #faf4f4; --acc: #9a4769; --dark: #5e2440; --bar1: #5e2440; --bar2: #c0618a; }
-.projects > .card.f-pbi { --bg1: #e4dcf1; --bg2: #eee8f6; --bg3: #f6f3f9; --acc: #6b4c9a; --dark: #4b3270; --bar1: #4b3270; --bar2: #8a6cc0; }
+.projects > .card.f-pm, .cs-intro.f-pm { --bg1: #d9e2f0; --bg2: #e8eef6; --bg3: #f4f6f9; --acc: #3b5a8c; --dark: #1f3557; --bar1: #1f3557; --bar2: #5a7fc0; }
+.projects > .card.f-ship, .cs-intro.f-ship { --bg1: #f0dde4; --bg2: #f6e9ed; --bg3: #faf4f4; --acc: #9a4769; --dark: #5e2440; --bar1: #5e2440; --bar2: #c0618a; }
+.projects > .card.f-pbi, .cs-intro.f-pbi { --bg1: #e4dcf1; --bg2: #eee8f6; --bg3: #f6f3f9; --acc: #6b4c9a; --dark: #4b3270; --bar1: #4b3270; --bar2: #8a6cc0; }
 .mock-shot { display: block; width: 100%; height: auto; aspect-ratio: 16 / 7; object-fit: cover; object-position: top; border-radius: 4px; border: 1px solid var(--line); }
-.projects > .card.f-factory { --bg1: #f2e2cc; --bg2: #f7ecdd; --bg3: #faf5ec; --acc: #9a6224; --dark: #7a4518; --bar1: #7a4518; --bar2: #d48a3c; }
+.projects > .card.f-factory, .cs-intro.f-factory { --bg1: #f2e2cc; --bg2: #f7ecdd; --bg3: #faf5ec; --acc: #9a6224; --dark: #7a4518; --bar1: #7a4518; --bar2: #d48a3c; }
 .feature .f-text { display: flex; flex-direction: column; gap: 16px; }
 .f-eyebrow { font-size: 11px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--acc); }
-.projects > .card.feature h3 { font-family: var(--sans); font-weight: 700; font-size: clamp(21px, 2vw, 26px); line-height: 1.18; letter-spacing: -.02em; color: var(--ink); }
+.projects > .card.feature h3 { font-family: var(--sans); font-weight: 700; font-size: clamp(23px, 2.4vw, 30px); line-height: 1.15; letter-spacing: -.02em; color: var(--ink); }
 .projects > .card.feature .kicker { color: var(--muted); max-width: 34em; }
 .feature .links { margin-top: 6px; }
 .projects > .card.feature .links a { color: var(--dark); }
-.f-mock { background: #ffffff; color: var(--ink); border-radius: 8px; padding: 18px 20px 14px; box-shadow: 0 18px 40px -20px rgba(23,35,58,.35), 0 0 0 1px rgba(23,35,58,.06); margin-top: auto; }
+.f-mock { background: #ffffff; color: var(--ink); border-radius: 8px; padding: 18px 20px 14px; box-shadow: 0 18px 40px -20px rgba(23,35,58,.35), 0 0 0 1px rgba(23,35,58,.06); }
 .mock-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; font-size: 12px; color: var(--muted); border-bottom: 1px solid var(--line); padding-bottom: 10px; margin-bottom: 12px; }
 .mock-head b { font-size: 12px; color: var(--dark); white-space: nowrap; }
 .mock-bars { display: grid; gap: 8px; }
@@ -172,8 +171,7 @@ h2:focus { outline: none; }
 .mock-rank span { font-size: 12px; color: var(--muted); line-height: 1.35; }
 .mock-rank strong { display: block; font-size: 18px; color: var(--ink); font-variant-numeric: tabular-nums; }
 @media (max-width: 760px) {
-  .projects > .card.feature { padding: 28px 22px; gap: 24px; }
-  .projects > .card.feature:last-child:nth-child(odd) { width: auto; }
+  .projects > .card.feature { grid-template-columns: minmax(0, 1fr); padding: 28px 22px; gap: 24px; }
   .f-mock { transform: none; }
 }
 .card { background: var(--surface); padding: 32px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
@@ -280,7 +278,9 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
 .card .kicker { font-size: 15px; color: var(--muted); }
 .card.soon { justify-content: center; }
 .card.soon p { color: var(--muted); }
-.cs-lede { font-size: 20px; line-height: 1.7; color: var(--muted); max-width: 40em; }
+.cs-lede { font-size: 17px; line-height: 1.7; color: var(--muted); max-width: 40em; }
+.cs-intro { --acc: #2b7a6c; --dark: #134e4a; --bar1: #1f6f68; --bar2: #3fae94; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 400px); gap: 40px; align-items: center; }
+@media (max-width: 860px) { .cs-intro { grid-template-columns: minmax(0, 1fr); gap: 24px; } }
 .cs-meta { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding-block: 20px; }
 .cs-meta div { display: flex; flex-direction: column; gap: 4px; min-width: 0; font-size: 15px; }
 .cs-kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
@@ -555,7 +555,17 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
       <a class="back" href="#projects">← Back to projects</a>
 
       <h2>Project Management System Migration <span class="label">Case study</span></h2>
-      <p class="cs-lede">Our Digital Transformation project portfolio was managed in Anaplan, which was hitting its limits and costing a lot in licenses. As the business-side owner of the tool, I led the business side of the move to Microsoft Project Online (MSPO), from requirements to reporting, and made the process simpler along the way.</p>
+      <div class="cs-intro f-pm">
+        <p class="cs-lede">Our Digital Transformation project portfolio was managed in Anaplan, which was hitting its limits and costing a lot in licenses. As the business-side owner of the tool, I led the business side of the move to Microsoft Project Online (MSPO), from requirements to reporting, and made the process simpler along the way.</p>
+      <div class="f-mock" aria-hidden="true">
+        <div class="mock-head"><span>Steps to set up a program</span><b>33% fewer</b></div>
+        <div class="mock-label">Before · Anaplan · 18 steps</div>
+        <div class="mock-steps"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="mock-label">After · Microsoft Project Online · 12 steps</div>
+        <div class="mock-steps on"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="mock-stats"><div><b>~$300K</b><span>license cost saved a year</span></div><div><b>200+</b><span>programs migrated</span></div><div><b>9</b><span>business groups</span></div></div>
+      </div>
+      </div>
 
       <div class="cs-meta">
         <div><span class="label">My role</span>Business-side system owner and key user</div>
@@ -679,7 +689,14 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
       <a class="back" href="#projects">← Back to projects</a>
 
       <h2>Automated Portfolio Cash Reporting in Power BI <span class="label">Case study</span></h2>
-      <p class="cs-lede">Every month our team reported program spending to the leaders of six business platforms, one hand-built PowerPoint deck per platform. I replaced the six decks with self-serve Power BI reports that leaders can open any time, each showing only that platform's data.</p>
+      <div class="cs-intro f-pbi">
+        <p class="cs-lede">Every month our team reported program spending to the leaders of six business platforms, one hand-built PowerPoint deck per platform. I replaced the six decks with self-serve Power BI reports that leaders can open any time, each showing only that platform's data.</p>
+      <div class="f-mock" aria-hidden="true">
+        <div class="mock-head"><span>Portfolio cash overview · Power BI</span><b>~10 hrs/week saved</b></div>
+        <img class="mock-shot" src="photos/pbi-cash-card.jpg" alt="Power BI program-level cash overview page with KPI tiles, spending mix and a program table" loading="lazy">
+        <div class="mock-foot"><span>Sample data for demo purposes only</span><span>6 platforms</span></div>
+      </div>
+      </div>
 
       <div class="cs-meta">
         <div><span class="label">Team</span>Lenovo Digital Transformation Office</div>
@@ -782,7 +799,19 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
       <a class="back" href="#projects">← Back to projects</a>
 
       <h2>Predicting Checkout Spend to Target Free Shipping <span class="label">Case study · UW Business Analytics</span></h2>
-      <p class="cs-lede">A regression model that predicts each shopper's checkout spend, so free shipping goes only to those likely to spend $150 or more. The final Lasso model cut typical prediction error from $42 to $22 using just 7 of 103 inputs.</p>
+      <div class="cs-intro f-ship">
+        <p class="cs-lede">A regression model that predicts each shopper's checkout spend, so free shipping goes only to those likely to spend $150 or more. The final Lasso model cut typical prediction error from $42 to $22 using just 7 of 103 inputs.</p>
+      <div class="f-mock" aria-hidden="true">
+        <div class="mock-head"><span>Typical prediction error per shopper</span><b>Lasso model</b></div>
+        <div class="mock-bars">
+          <div><span>Baseline</span><i class="muted" style="--w:31%"></i><em>$42</em></div>
+          <div><span>Final Lasso</span><i style="--w:16.2%"></i><em>$22</em></div>
+        </div>
+        <div class="mock-label" style="margin-top:14px">Inputs kept: 7 of 103</div>
+        <div class="mock-dots"><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="on"></i><i></i><i></i><i></i></div>
+        <div class="mock-stats"><div><b>72%</b><span>offers to real $150+ shoppers</span></div><div><b>$104</b><span>wasted-offer cost, lowest tested</span></div><div><b>1,500</b><span>checkout sessions</span></div></div>
+      </div>
+      </div>
 
       <div class="cs-meta">
         <div><span class="label">Decision</span>Who gets free shipping, which costs $8 per order</div>
@@ -890,7 +919,19 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
       <a class="back" href="#projects">← Back to projects</a>
 
       <h2>Factory Capacity and Inventory Strategy <span class="label">Case study · UW Business Analytics</span></h2>
-      <p class="cs-lede">Littlefield is an online simulation of an electronics factory with three workstations. Our team took over on day 50 and made every decision on machines, delivery contracts and kit inventory until the game ended on day 268. Using queueing, inventory and newsvendor models, we finished No. 1 in the class with $2,436,166 in cash.</p>
+      <div class="cs-intro f-factory">
+        <p class="cs-lede">Littlefield is an online simulation of an electronics factory with three workstations. Our team took over on day 50 and made every decision on machines, delivery contracts and kit inventory until the game ended on day 268. Using queueing, inventory and newsvendor models, we finished No. 1 in the class with $2,436,166 in cash.</p>
+      <div class="f-mock" aria-hidden="true">
+        <div class="mock-head"><span>Littlefield simulation · final results</span><b>Day 268</b></div>
+        <div class="mock-rank"><b>#1</b><span>Class ranking<strong>$2,436,166 cash</strong></span></div>
+        <div class="mock-label">Lead time per job (days)</div>
+        <div class="mock-bars">
+          <div><span>Day 50</span><i class="muted" style="--w:31%"></i><em>3.7</em></div>
+          <div><span>After fixes</span><i style="--w:3.6%"></i><em>0.43</em></div>
+        </div>
+        <div class="mock-foot"><span>0 jobs waiting for kits, days 55–267</span><span>Excel</span></div>
+      </div>
+      </div>
 
       <div class="cs-meta">
         <div><span class="label">Team</span>Group 4, MSBA classmates</div>
@@ -988,7 +1029,21 @@ footer { margin-block: 64px 40px; font-size: 11px; letter-spacing: .14em; text-t
       <a class="back" href="#projects">← Back to projects</a>
 
       <h2>EV Adoption Across Washington State <span class="label">Case study · UW Business Analytics</span></h2>
-      <p class="cs-lede">A team analysis of about 290,000 registered electric vehicles in Washington, asking which counties are adopting fastest, what kinds of EVs they buy, and whether income plays a role. I handled the data cleaning across four tables in MySQL and built the county-level analysis of electric share and range.</p>
+      <div class="cs-intro f-ev">
+        <p class="cs-lede">A team analysis of about 290,000 registered electric vehicles in Washington, asking which counties are adopting fastest, what kinds of EVs they buy, and whether income plays a role. I handled the data cleaning across four tables in MySQL and built the county-level analysis of electric share and range.</p>
+      <div class="f-mock" aria-hidden="true">
+        <div class="mock-head"><span>EV share of 2025 new registrations</span><b>~290K records</b></div>
+        <div class="mock-bars">
+          <div><span>Pierce</span><i style="--w:32.1%"></i><em>32%</em></div>
+          <div><span>Clark</span><i style="--w:31.7%"></i><em>32%</em></div>
+          <div><span>Snohomish</span><i style="--w:31.6%"></i><em>32%</em></div>
+          <div><span>King</span><i style="--w:30.4%"></i><em>30%</em></div>
+          <div><span>Spokane</span><i style="--w:21.7%"></i><em>22%</em></div>
+          <div><span>Kitsap</span><i style="--w:21.3%"></i><em>21%</em></div>
+        </div>
+        <div class="mock-foot"><span>Top counties · WA DOL registry</span><span>MySQL</span></div>
+      </div>
+      </div>
 
       <div class="cs-meta">
         <div><span class="label">Team</span>Five MSBA classmates</div>
